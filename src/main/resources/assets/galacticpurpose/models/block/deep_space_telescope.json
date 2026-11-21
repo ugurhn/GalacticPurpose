@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "galacticpurpose:block/deep_space_telescope_top",
+    "front": "galacticpurpose:block/deep_space_telescope_front",
+    "side": "galacticpurpose:block/deep_space_telescope_side"
+  }
+}

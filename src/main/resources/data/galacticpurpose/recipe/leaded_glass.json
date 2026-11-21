@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [" G ","GLG"," G "],
+  "key": {
+    "L": { "tag": "c:ingots/lead" },
+    "G": { "item": "minecraft:glass" }
+  },
+  "result": { "count": 4, "id": "galacticpurpose:leaded_glass" }
+}

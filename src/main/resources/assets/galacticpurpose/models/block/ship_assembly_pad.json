@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "galacticpurpose:block/ship_assembly_pad_top",
+    "bottom": "galacticpurpose:block/ship_assembly_pad_side",
+    "side": "galacticpurpose:block/ship_assembly_pad_side"
+  }
+}

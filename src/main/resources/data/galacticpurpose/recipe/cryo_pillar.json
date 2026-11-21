@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "galacticpurpose:cryo_slate"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:cryo_pillar",
+    "count": 2
+  }
+}

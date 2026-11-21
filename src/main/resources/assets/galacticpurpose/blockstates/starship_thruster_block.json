@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "galacticpurpose:block/starship_thruster_block"
+    }
+  }
+}

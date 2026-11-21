@@ -1,0 +1,8 @@
+{
+  "type": "galacticpurpose:orbital_transit",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "galacticpurpose:orbital_transit",
+    "biome_source": { "type": "minecraft:fixed", "biome": "galacticpurpose:orbital_transit" }
+  }
+}

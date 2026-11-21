@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "galacticpurpose:ignis_alloy_block"
+    }
+  ],
+  "result": {
+    "id": "galacticpurpose:ignis_ingot",
+    "count": 9
+  }
+}

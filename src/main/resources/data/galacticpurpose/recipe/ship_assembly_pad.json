@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HHH",
+    "CRC",
+    "HHH"
+  ],
+  "key": {
+    "H": {
+      "item": "galacticpurpose:starship_hull_plating"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:ship_assembly_pad",
+    "count": 1
+  }
+}

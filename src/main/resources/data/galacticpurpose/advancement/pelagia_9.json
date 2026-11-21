@@ -1,0 +1,15 @@
+{
+  "parent": "galacticpurpose:hephaestus_iv",
+  "criteria": {
+    "entered": {
+      "conditions": { "to": "galacticpurpose:pelagia_9" },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": { "translate": "advancement.galacticpurpose.pelagia_9.desc" },
+    "icon": { "count": 1, "id": "galacticpurpose:bio_stabilizer" },
+    "title": { "translate": "advancement.galacticpurpose.pelagia_9.title" }
+  },
+  "requirements": [["entered"]]
+}

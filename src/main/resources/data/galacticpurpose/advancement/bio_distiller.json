@@ -1,0 +1,17 @@
+{
+  "parent": "galacticpurpose:lead_bunker",
+  "criteria": {
+    "has_bio_fuel": {
+      "conditions": {
+        "items": [{ "items": "galacticpurpose:exotic_bio_fuel" }]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": { "translate": "advancement.galacticpurpose.bio_distiller.desc" },
+    "icon": { "count": 1, "id": "galacticpurpose:exotic_bio_fuel" },
+    "title": { "translate": "advancement.galacticpurpose.bio_distiller.title" }
+  },
+  "requirements": [["has_bio_fuel"]]
+}

@@ -1,0 +1,18 @@
+{
+  "parent": "galacticpurpose:bio_distiller",
+  "criteria": {
+    "has_core": {
+      "conditions": {
+        "items": [{ "items": "galacticpurpose:wormhole_core" }]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": { "translate": "advancement.galacticpurpose.wormhole_core.desc" },
+    "frame": "goal",
+    "icon": { "count": 1, "id": "galacticpurpose:wormhole_core" },
+    "title": { "translate": "advancement.galacticpurpose.wormhole_core.title" }
+  },
+  "requirements": [["has_core"]]
+}

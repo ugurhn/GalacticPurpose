@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": ["GGG", "CRC", "LIL"],
+  "key": {
+    "G": { "tag": "c:glass_blocks" },
+    "C": { "item": "minecraft:copper_ingot" },
+    "R": { "item": "minecraft:redstone" },
+    "L": { "tag": "c:ingots/lead" },
+    "I": { "item": "minecraft:iron_ingot" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:solar_flux_generator" }
+}

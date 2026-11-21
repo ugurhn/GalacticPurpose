@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SOS",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "galacticpurpose:frozen_quantum_spire"
+    },
+    "O": {
+      "item": "galacticpurpose:frost_obsidian"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_fuel_cell",
+    "count": 2
+  }
+}

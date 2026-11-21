@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "RRR",
+    "HHH"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "H": {
+      "item": "galacticpurpose:starship_hull_plating"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_light_strip",
+    "count": 4
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": ["LGL","GSG","LGL"],
+  "key": {
+    "L": { "tag": "c:ingots/lead" },
+    "G": { "item": "minecraft:gravel" },
+    "S": { "item": "minecraft:sand" }
+  },
+  "result": { "count": 8, "id": "galacticpurpose:lead_concrete" }
+}

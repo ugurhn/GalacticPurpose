@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "galacticpurpose:block/pelagic_pillar",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "galacticpurpose:block/pelagic_pillar"
+    },
+    "axis=z": {
+      "model": "galacticpurpose:block/pelagic_pillar",
+      "x": 90
+    }
+  }
+}

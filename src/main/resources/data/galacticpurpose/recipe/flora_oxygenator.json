@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": ["IGI","BMB","IRI"],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "G": { "item": "galacticpurpose:leaded_glass" },
+    "B": { "item": "minecraft:bone_meal" },
+    "M": { "item": "minecraft:moss_block" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:flora_oxygenator" }
+}

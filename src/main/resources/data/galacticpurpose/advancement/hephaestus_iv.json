@@ -1,0 +1,15 @@
+{
+  "parent": "galacticpurpose:wormhole_core",
+  "criteria": {
+    "entered": {
+      "conditions": { "to": "galacticpurpose:hephaestus_iv" },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": { "translate": "advancement.galacticpurpose.hephaestus_iv.desc" },
+    "icon": { "count": 1, "id": "galacticpurpose:thermium_crystal" },
+    "title": { "translate": "advancement.galacticpurpose.hephaestus_iv.title" }
+  },
+  "requirements": [["entered"]]
+}

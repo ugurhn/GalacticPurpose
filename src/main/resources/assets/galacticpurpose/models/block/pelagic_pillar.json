@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "galacticpurpose:block/pelagic_pillar_top",
+    "side": "galacticpurpose:block/pelagic_pillar"
+  }
+}

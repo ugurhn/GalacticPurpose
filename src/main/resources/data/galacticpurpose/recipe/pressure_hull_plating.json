@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LCL",
+    "CPC",
+    "LCL"
+  ],
+  "key": {
+    "L": {
+      "tag": "c:ingots/lead"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "P": {
+      "item": "galacticpurpose:pelagic_bricks"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:pressure_hull_plating",
+    "count": 4
+  }
+}

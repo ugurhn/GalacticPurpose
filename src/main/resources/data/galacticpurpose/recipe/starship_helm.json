@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "HDH",
+    "HRH"
+  ],
+  "key": {
+    "G": {
+      "item": "galacticpurpose:reinforced_viewport_glass"
+    },
+    "H": {
+      "item": "galacticpurpose:starship_hull_plating"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_helm",
+    "count": 1
+  }
+}

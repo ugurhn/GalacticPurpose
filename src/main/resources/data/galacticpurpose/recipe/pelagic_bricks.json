@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "key": {
+    "B": {
+      "item": "galacticpurpose:abyssal_shale"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:pelagic_bricks",
+    "count": 4
+  }
+}

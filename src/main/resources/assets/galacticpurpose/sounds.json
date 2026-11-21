@@ -1,0 +1,62 @@
+{
+  "wormhole_reactor_hum": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  },
+  "wormhole_ambience": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  },
+  "singularity_collapse_siren": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  },
+  "singularity_detonation": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  },
+  "starship_launch_nasa": {
+    "sounds": [
+      { "name": "galacticpurpose:rocket_launch_heavy_nasa", "stream": true }
+    ]
+  },
+  "starship_ascent_nasa": {
+    "sounds": [
+      { "name": "galacticpurpose:rocket_ascent_nasa", "stream": true }
+    ]
+  },
+  "starship_rumble_nasa": {
+    "sounds": [
+      { "name": "galacticpurpose:rocket_descent_nasa", "stream": true }
+    ]
+  },
+  "starship_countdown_ping": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  },
+  "starship_autopilot_chime": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  },
+  "wormhole_warp_transit": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  },
+  "starship_touchdown_hydraulics": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  },
+  "starship_abort_alarm": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  }
+}

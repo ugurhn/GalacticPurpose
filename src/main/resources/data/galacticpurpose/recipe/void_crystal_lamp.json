@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BCB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "galacticpurpose:cryo_bricks"
+    },
+    "C": {
+      "item": "galacticpurpose:frozen_quantum_spire"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:void_crystal_lamp",
+    "count": 2
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LIL",
+    "ICI",
+    "LIL"
+  ],
+  "key": {
+    "L": {
+      "tag": "c:ingots/lead"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "galacticpurpose:cryo_bricks"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:zero_k_plating",
+    "count": 4
+  }
+}

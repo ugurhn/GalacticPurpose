@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": ["ICI","BFB","IRI"],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "C": { "item": "minecraft:copper_ingot" },
+    "B": { "item": "minecraft:blaze_powder" },
+    "F": { "item": "minecraft:furnace" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:thermal_heater" }
+}

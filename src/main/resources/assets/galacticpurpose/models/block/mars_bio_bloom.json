@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "galacticpurpose:block/mars_bio_bloom"
+  }
+}

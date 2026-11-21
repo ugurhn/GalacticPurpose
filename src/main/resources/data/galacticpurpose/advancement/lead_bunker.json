@@ -1,0 +1,17 @@
+{
+  "parent": "galacticpurpose:root",
+  "criteria": {
+    "has_lead_concrete": {
+      "conditions": {
+        "items": [{ "items": "galacticpurpose:lead_concrete" }]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": { "translate": "advancement.galacticpurpose.lead_bunker.desc" },
+    "icon": { "count": 1, "id": "galacticpurpose:lead_concrete" },
+    "title": { "translate": "advancement.galacticpurpose.lead_bunker.title" }
+  },
+  "requirements": [["has_lead_concrete"]]
+}

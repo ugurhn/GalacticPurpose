@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "H",
+    "H"
+  ],
+  "key": {
+    "H": {
+      "item": "galacticpurpose:starship_hull_plating"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_ribbed_panel",
+    "count": 2
+  }
+}

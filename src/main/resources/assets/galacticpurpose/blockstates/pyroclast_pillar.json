@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "galacticpurpose:block/pyroclast_pillar",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "galacticpurpose:block/pyroclast_pillar"
+    },
+    "axis=z": {
+      "model": "galacticpurpose:block/pyroclast_pillar",
+      "x": 90
+    }
+  }
+}

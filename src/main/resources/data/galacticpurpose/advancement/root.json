@@ -1,0 +1,23 @@
+{
+  "criteria": {
+    "joined": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "galacticpurpose:textures/block/lead_concrete.png",
+    "description": {
+      "translate": "advancement.galacticpurpose.root.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "galacticpurpose:solar_telemetry_monitor"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.galacticpurpose.root.title"
+    }
+  },
+  "requirements": [["joined"]]
+}

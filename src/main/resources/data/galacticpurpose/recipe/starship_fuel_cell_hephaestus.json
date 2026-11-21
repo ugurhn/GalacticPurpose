@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "IAI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "tag": "c:ingots/ignis"
+    },
+    "A": {
+      "item": "galacticpurpose:ember_ash"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_fuel_cell",
+    "count": 2
+  }
+}

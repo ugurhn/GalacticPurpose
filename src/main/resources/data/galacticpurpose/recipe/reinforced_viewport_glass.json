@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GLG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "galacticpurpose:leaded_glass"
+    },
+    "L": {
+      "item": "galacticpurpose:starship_hull_plating"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:reinforced_viewport_glass",
+    "count": 8
+  }
+}

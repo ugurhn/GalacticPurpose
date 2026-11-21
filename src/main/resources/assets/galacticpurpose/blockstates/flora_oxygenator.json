@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,lit=false": { "model": "galacticpurpose:block/flora_oxygenator" },
+    "facing=east,lit=false":  { "model": "galacticpurpose:block/flora_oxygenator", "y": 90 },
+    "facing=south,lit=false": { "model": "galacticpurpose:block/flora_oxygenator", "y": 180 },
+    "facing=west,lit=false":  { "model": "galacticpurpose:block/flora_oxygenator", "y": 270 },
+    "facing=north,lit=true":  { "model": "galacticpurpose:block/flora_oxygenator_on" },
+    "facing=east,lit=true":   { "model": "galacticpurpose:block/flora_oxygenator_on", "y": 90 },
+    "facing=south,lit=true":  { "model": "galacticpurpose:block/flora_oxygenator_on", "y": 180 },
+    "facing=west,lit=true":   { "model": "galacticpurpose:block/flora_oxygenator_on", "y": 270 }
+  }
+}

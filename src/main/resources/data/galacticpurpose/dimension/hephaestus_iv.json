@@ -1,0 +1,8 @@
+{
+  "type": "galacticpurpose:hephaestus_iv",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "galacticpurpose:hephaestus_iv",
+    "biome_source": { "type": "minecraft:fixed", "biome": "galacticpurpose:hephaestus_caldera" }
+  }
+}

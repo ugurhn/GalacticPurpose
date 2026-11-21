@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BCB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "galacticpurpose:pyroclast_bricks"
+    },
+    "C": {
+      "item": "minecraft:magma_cream"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:magma_conduit_lamp",
+    "count": 2
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": ["CLC","L L","C C"],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "L": { "tag": "c:ingots/lead" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:pressure_leggings" }
+}

@@ -1,0 +1,30 @@
+{
+  "carvers": {},
+  "downfall": 0.5,
+  "effects": {
+    "fog_color": 732488,
+    "sky_color": 658740,
+    "water_color": 2131652,
+    "water_fog_color": 1387828
+  },
+  "features": [
+    [], [], [], [], [], [],
+    ["galacticpurpose:abyssal_vent"],
+    [], [],
+    ["minecraft:kelp_cold", "minecraft:seagrass_normal", "galacticpurpose:sea_pod_patch"],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.5
+}

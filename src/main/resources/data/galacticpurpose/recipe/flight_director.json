@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "pattern": [
+    " G ",
+    "ICI",
+    "LRL"
+  ],
+  "key": {
+    "G": {
+      "item": "galacticpurpose:reinforced_viewport_glass"
+    },
+    "I": {
+      "item": "galacticpurpose:ignis_ingot"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "L": {
+      "item": "galacticpurpose:lead_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:flight_director",
+    "count": 1
+  }
+}

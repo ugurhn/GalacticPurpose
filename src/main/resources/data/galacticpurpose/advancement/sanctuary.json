@@ -1,0 +1,16 @@
+{
+  "parent": "galacticpurpose:quantum_core",
+  "criteria": {
+    "entered": {
+      "conditions": { "to": "galacticpurpose:sanctuary" },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": { "translate": "advancement.galacticpurpose.sanctuary.desc" },
+    "frame": "challenge",
+    "icon": { "count": 1, "id": "galacticpurpose:coordinate_card_sanctuary" },
+    "title": { "translate": "advancement.galacticpurpose.sanctuary.title" }
+  },
+  "requirements": [["entered"]]
+}

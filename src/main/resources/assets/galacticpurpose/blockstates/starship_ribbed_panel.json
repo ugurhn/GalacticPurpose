@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "galacticpurpose:block/starship_ribbed_panel",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "galacticpurpose:block/starship_ribbed_panel"
+    },
+    "axis=z": {
+      "model": "galacticpurpose:block/starship_ribbed_panel",
+      "x": 90
+    }
+  }
+}

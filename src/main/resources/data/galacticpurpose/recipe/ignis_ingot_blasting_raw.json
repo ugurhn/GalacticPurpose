@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "galacticpurpose:raw_ignis"
+  },
+  "result": {
+    "id": "galacticpurpose:ignis_ingot"
+  },
+  "experience": 1.0,
+  "cookingtime": 100
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": ["LCL","RDR","LCL"],
+  "key": {
+    "L": { "item": "galacticpurpose:lead_concrete" },
+    "C": { "item": "minecraft:copper_block" },
+    "R": { "item": "minecraft:redstone_block" },
+    "D": { "item": "minecraft:diamond" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:wormhole_injector" }
+}

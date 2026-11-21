@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": ["LPL","EDE","LRL"],
+  "key": {
+    "L": { "item": "galacticpurpose:lead_concrete" },
+    "P": { "item": "minecraft:ender_eye" },
+    "E": { "item": "minecraft:diamond" },
+    "D": { "item": "galacticpurpose:exotic_bio_fuel" },
+    "R": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:wormhole_core" }
+}

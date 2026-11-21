@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": ["LGL","IBI","RCR"],
+  "key": {
+    "L": { "tag": "c:ingots/lead" },
+    "G": { "item": "minecraft:glass" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "B": { "item": "minecraft:brewing_stand" },
+    "R": { "item": "minecraft:redstone" },
+    "C": { "item": "minecraft:copper_ingot" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:bio_distiller" }
+}

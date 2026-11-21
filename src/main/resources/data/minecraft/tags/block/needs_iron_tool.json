@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "galacticpurpose:lead_ore",
+    "galacticpurpose:deepslate_lead_ore",
+    "galacticpurpose:lead_concrete",
+    "galacticpurpose:wormhole_core",
+    "galacticpurpose:wormhole_stabilizer_pylon",
+    "galacticpurpose:wormhole_injector",
+    "galacticpurpose:thermal_shard_ore",
+    "galacticpurpose:fusion_relay_wreckage",
+    "galacticpurpose:abyssal_vent",
+    "galacticpurpose:quantum_crystal_ore",
+    "galacticpurpose:cryo_beacon",
+    "galacticpurpose:ignis_ore",
+    "galacticpurpose:frost_obsidian",
+    "galacticpurpose:ignis_alloy_block",
+    "galacticpurpose:starship_hull_plating",
+    "galacticpurpose:ship_assembly_pad",
+    "galacticpurpose:starship_helm"
+  ]
+}

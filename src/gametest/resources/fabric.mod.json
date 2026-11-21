@@ -1,0 +1,16 @@
+{
+	"schemaVersion": 1,
+	"id": "galacticpurpose-gametest",
+	"version": "${version}",
+	"name": "Galactic Purpose GameTests",
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-gametest": [
+			"com.galacticpurpose.gametest.GalacticPurposeGameTests"
+		]
+	},
+	"depends": {
+		"galacticpurpose": "*"
+	}
+}

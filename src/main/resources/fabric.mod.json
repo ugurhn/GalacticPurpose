@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "galacticpurpose",
+	"version": "${version}",
+	"name": "Galactic Purpose",
+	"description": "A progression, terraforming, solar collapse, and exoplanet add-on designed for Galacticraft 5 on Minecraft 1.21.1.",
+	"authors": [
+		"Galactic Purpose Contributors"
+	],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.galacticpurpose.GalacticPurpose"
+		],
+		"client": [
+			"com.galacticpurpose.client.GalacticPurposeClient"
+		]
+	},
+	"mixins": [
+		"galacticpurpose.mixins.json",
+		{
+			"config": "galacticpurpose.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"minecraft": "~${minecraft_version}",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"galacticraft": "*"
+	}
+}

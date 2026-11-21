@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "galacticpurpose:abyssal_shale"
+  },
+  "result": {
+    "id": "galacticpurpose:carved_pelagic_tile",
+    "count": 1
+  }
+}

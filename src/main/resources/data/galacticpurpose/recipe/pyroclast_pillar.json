@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "galacticpurpose:scorched_basalt"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:pyroclast_pillar",
+    "count": 2
+  }
+}

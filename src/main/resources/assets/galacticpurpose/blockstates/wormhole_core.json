@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "stage=0": { "model": "galacticpurpose:block/wormhole_core_0" },
+    "stage=1": { "model": "galacticpurpose:block/wormhole_core_1" },
+    "stage=2": { "model": "galacticpurpose:block/wormhole_core_2" },
+    "stage=3": { "model": "galacticpurpose:block/wormhole_core_3" }
+  }
+}

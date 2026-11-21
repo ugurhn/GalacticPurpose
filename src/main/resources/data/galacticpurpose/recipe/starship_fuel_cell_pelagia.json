@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "PCP",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "galacticpurpose:luminescent_sea_pod"
+    },
+    "C": {
+      "item": "galacticpurpose:abyssal_coralstone"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_fuel_cell",
+    "count": 2
+  }
+}

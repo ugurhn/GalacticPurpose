@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "com.galacticpurpose.client.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"CameraMixin",
+		"ClientLevelMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

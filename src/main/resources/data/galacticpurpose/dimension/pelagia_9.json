@@ -1,0 +1,8 @@
+{
+  "type": "galacticpurpose:pelagia_9",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "galacticpurpose:pelagia_9",
+    "biome_source": { "type": "minecraft:fixed", "biome": "galacticpurpose:pelagia_abyss" }
+  }
+}

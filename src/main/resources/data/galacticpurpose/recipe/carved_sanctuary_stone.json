@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "galacticpurpose:sanctuary_bricks"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:carved_sanctuary_stone",
+    "count": 2
+  }
+}

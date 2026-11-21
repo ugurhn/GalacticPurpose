@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": ["LGL","RCR","LLL"],
+  "key": {
+    "L": { "tag": "c:ingots/lead" },
+    "G": { "item": "galacticpurpose:leaded_glass" },
+    "R": { "item": "minecraft:redstone" },
+    "C": { "item": "minecraft:compass" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:solar_telemetry_monitor" }
+}

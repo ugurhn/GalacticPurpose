@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [" C ", "LRL", "LRL"],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "L": { "tag": "c:ingots/lead" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:lead_energy_cell" }
+}

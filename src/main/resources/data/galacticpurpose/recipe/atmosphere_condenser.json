@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": ["CDC","LBL","CRC"],
+  "key": {
+    "C": { "item": "galacticpurpose:lead_concrete" },
+    "D": { "item": "minecraft:diamond" },
+    "L": { "tag": "c:ingots/lead" },
+    "B": { "item": "minecraft:bucket" },
+    "R": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:atmosphere_condenser" }
+}

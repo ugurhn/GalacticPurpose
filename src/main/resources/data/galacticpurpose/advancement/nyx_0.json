@@ -1,0 +1,15 @@
+{
+  "parent": "galacticpurpose:pelagia_9",
+  "criteria": {
+    "entered": {
+      "conditions": { "to": "galacticpurpose:nyx_0" },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": { "translate": "advancement.galacticpurpose.nyx_0.desc" },
+    "icon": { "count": 1, "id": "galacticpurpose:quantum_crystal" },
+    "title": { "translate": "advancement.galacticpurpose.nyx_0.title" }
+  },
+  "requirements": [["entered"]]
+}

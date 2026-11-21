@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "galacticpurpose:block/machine_top",
+    "front": "galacticpurpose:block/atmosphere_condenser_front",
+    "side": "galacticpurpose:block/machine_side"
+  }
+}

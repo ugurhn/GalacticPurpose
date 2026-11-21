@@ -1,0 +1,18 @@
+{
+  "parent": "galacticpurpose:nyx_0",
+  "criteria": {
+    "has_quantum_core": {
+      "conditions": {
+        "items": [{ "items": "galacticpurpose:quantum_core" }]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": { "translate": "advancement.galacticpurpose.quantum_core.desc" },
+    "frame": "goal",
+    "icon": { "count": 1, "id": "galacticpurpose:quantum_core" },
+    "title": { "translate": "advancement.galacticpurpose.quantum_core.title" }
+  },
+  "requirements": [["has_quantum_core"]]
+}

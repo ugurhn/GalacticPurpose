@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "galacticpurpose:scorched_basalt"
+  },
+  "result": {
+    "id": "galacticpurpose:pyroclast_bricks",
+    "count": 1
+  }
+}

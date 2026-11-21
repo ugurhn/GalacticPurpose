@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HGH",
+    "THT",
+    "LCL"
+  ],
+  "key": {
+    "H": {
+      "item": "galacticpurpose:starship_hull_plating"
+    },
+    "G": {
+      "item": "galacticpurpose:reinforced_viewport_glass"
+    },
+    "T": {
+      "item": "galacticpurpose:starship_thruster_block"
+    },
+    "L": {
+      "item": "galacticpurpose:starship_cargo_locker"
+    },
+    "C": {
+      "item": "galacticpurpose:starship_helm"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_blueprint",
+    "count": 1
+  }
+}

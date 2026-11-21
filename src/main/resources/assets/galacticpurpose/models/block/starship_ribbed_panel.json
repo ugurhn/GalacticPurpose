@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "galacticpurpose:block/starship_ribbed_panel_top",
+    "side": "galacticpurpose:block/starship_ribbed_panel"
+  }
+}

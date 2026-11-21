@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": ["LAL","ACA","LRL"],
+  "key": {
+    "L": { "item": "galacticpurpose:lead_concrete" },
+    "A": { "item": "minecraft:amethyst_shard" },
+    "C": { "item": "minecraft:copper_block" },
+    "R": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "count": 2, "id": "galacticpurpose:wormhole_stabilizer_pylon" }
+}

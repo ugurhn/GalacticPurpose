@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IQI",
+    "QSQ",
+    "IQI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "S": {
+      "item": "galacticpurpose:sanctuary_bricks"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:ark_titanium_plating",
+    "count": 4
+  }
+}

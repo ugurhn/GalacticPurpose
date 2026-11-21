@@ -1,0 +1,30 @@
+{
+  "carvers": {},
+  "downfall": 0,
+  "effects": {
+    "fog_color": 4856589,
+    "sky_color": 1903622,
+    "water_color": 4159204,
+    "water_fog_color": 329011
+  },
+  "features": [
+    [], [], [], [], [], [],
+    ["galacticpurpose:ore_thermal_shard", "galacticpurpose:ore_ignis", "galacticpurpose:ember_ash_patch", "galacticpurpose:fusion_relay_wreckage"],
+    [], [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 2
+}

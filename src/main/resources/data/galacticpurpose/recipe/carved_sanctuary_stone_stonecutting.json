@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "galacticpurpose:luminous_limestone"
+  },
+  "result": {
+    "id": "galacticpurpose:carved_sanctuary_stone",
+    "count": 1
+  }
+}

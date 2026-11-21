@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "galacticpurpose:block/starship_thruster_side",
+    "bottom": "galacticpurpose:block/starship_thruster_bottom",
+    "side": "galacticpurpose:block/starship_thruster_side"
+  }
+}

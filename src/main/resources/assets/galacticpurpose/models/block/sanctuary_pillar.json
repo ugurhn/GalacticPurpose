@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "galacticpurpose:block/sanctuary_pillar_top",
+    "side": "galacticpurpose:block/sanctuary_pillar"
+  }
+}

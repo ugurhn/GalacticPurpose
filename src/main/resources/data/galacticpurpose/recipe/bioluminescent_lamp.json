@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BCB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "galacticpurpose:pelagic_bricks"
+    },
+    "C": {
+      "item": "galacticpurpose:luminescent_sea_pod"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:bioluminescent_lamp",
+    "count": 2
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "galacticpurpose:ignis_ore"
+  },
+  "result": {
+    "id": "galacticpurpose:ignis_ingot"
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

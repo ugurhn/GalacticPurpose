@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "com.galacticpurpose.mixin",
+	"plugin": "com.galacticpurpose.mixin.GalacticPurposeMixinPlugin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"MarsOxygenLevelMixin",
+		"MinecraftServerMixin",
+		"ZeroGTravelMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

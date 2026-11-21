@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [" G ","ISI","LRL"],
+  "key": {
+    "G": { "item": "galacticpurpose:leaded_glass" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "S": { "item": "minecraft:spyglass" },
+    "L": { "tag": "c:ingots/lead" },
+    "R": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:deep_space_telescope" }
+}

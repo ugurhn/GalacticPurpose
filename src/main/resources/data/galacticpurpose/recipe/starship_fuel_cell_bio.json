@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "LFL",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "L": {
+      "tag": "c:ingots/lead"
+    },
+    "F": {
+      "item": "galacticpurpose:exotic_bio_fuel"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_fuel_cell",
+    "count": 2
+  }
+}

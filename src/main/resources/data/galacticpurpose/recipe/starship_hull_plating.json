@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ILI",
+    "LIL",
+    "ILI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "tag": "c:ingots/lead"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_hull_plating",
+    "count": 8
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BLB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "galacticpurpose:sanctuary_blossom"
+    },
+    "L": {
+      "item": "galacticpurpose:luminous_limestone"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:starship_fuel_cell",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "galacticpurpose:pyroclast_bricks"
+    }
+  },
+  "result": {
+    "id": "galacticpurpose:chiseled_pyroclast",
+    "count": 2
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [" E ","QMQ"," X "],
+  "key": {
+    "E": { "item": "minecraft:ender_eye" },
+    "Q": { "item": "galacticpurpose:quantum_crystal" },
+    "M": { "item": "minecraft:compass" },
+    "X": { "item": "galacticpurpose:exotic_bio_fuel" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:coordinate_card_sanctuary" }
+}

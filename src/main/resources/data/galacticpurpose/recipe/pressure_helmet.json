@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": ["CLC","CGC"],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "L": { "tag": "c:ingots/lead" },
+    "G": { "item": "minecraft:glass" }
+  },
+  "result": { "count": 1, "id": "galacticpurpose:pressure_helmet" }
+}

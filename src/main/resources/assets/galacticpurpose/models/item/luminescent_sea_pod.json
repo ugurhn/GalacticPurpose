@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "galacticpurpose:block/luminescent_sea_pod"
+  }
+}

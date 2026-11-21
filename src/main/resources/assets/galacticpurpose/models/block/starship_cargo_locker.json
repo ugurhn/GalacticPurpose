@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "galacticpurpose:block/starship_cargo_locker_side",
+    "bottom": "galacticpurpose:block/starship_cargo_locker_side",
+    "side": "galacticpurpose:block/starship_cargo_locker_front"
+  }
+}

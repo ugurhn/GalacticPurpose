@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "galacticpurpose:solar_radiation",
+    "galacticpurpose:hypothermia",
+    "galacticpurpose:solar_storm_radiation",
+    "galacticpurpose:extreme_heat",
+    "galacticpurpose:hydrostatic_pressure",
+    "galacticpurpose:cryo_void"
+  ]
+}
