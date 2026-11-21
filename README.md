@@ -95,7 +95,9 @@ Diğer Solucan Deliği / Çöküş / Gemi komutları:
 - **Hedef Sürüm:** Minecraft `1.21.1` • Fabric Loader `0.20.1+` • Fabric API `0.116.17+1.21.1` • Java `21+`
 - **TeamReborn Energy `4.1.0`:** Mod `.jar` içine gömülüdür (`include`).
 
-Kaynaktan doğrudan oyunu açmak veya `.jar` derlemek için:
+Windows'ta tek tıkla test sürümünü açmak için repo ana klasöründeki **[run-test-client.bat](run-test-client.bat)** dosyasına **çift tıklayabilirsiniz** (doğrudan `.\gradlew.bat runClient` başlatır).
+
+Kaynaktan komut satırıyla açmak veya `.jar` derlemek için:
 ```bash
 # Doğrudan geliştirici istemcisini başlat
 ./gradlew runClient
