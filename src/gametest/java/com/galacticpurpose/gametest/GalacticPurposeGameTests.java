@@ -32,6 +32,7 @@ import com.galacticpurpose.exoplanet.ExoplanetHazardTicker;
 import com.galacticpurpose.item.LeadArmorItem;
 import com.galacticpurpose.item.LeadEnergyCellItem;
 import com.galacticpurpose.item.PressureArmorItem;
+import com.galacticpurpose.item.StructureAssemblerItem;
 import com.galacticpurpose.item.ThermalArmorItem;
 import com.galacticpurpose.registry.ModBlocks;
 import com.galacticpurpose.registry.ModItems;
@@ -40,8 +41,13 @@ import com.galacticpurpose.terraforming.MarsTerraformingCalculator;
 import com.galacticpurpose.terraforming.MarsTerraformingState;
 import com.galacticpurpose.terraforming.MarsWorldTerraformer;
 import com.galacticpurpose.terraforming.RadiationShelterChecker;
+import com.galacticpurpose.terraforming.SolarStormPhase;
 import com.galacticpurpose.wormhole.ExoplanetRoute;
+import com.galacticpurpose.wormhole.WormholeAssemblerCalculator;
 import com.galacticpurpose.wormhole.WormholeMultiblockValidator;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import com.galacticpurpose.wormhole.WormholeState;
 import com.galacticpurpose.wormhole.WormholeTier;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
@@ -1012,6 +1018,126 @@ public class GalacticPurposeGameTests implements FabricGameTest {
 		core.handleMenuButton(bare, 2);
 		helper.assertTrue(bare.level().dimension().equals(Level.OVERWORLD), "GUI Enter button must require Horizon Lander transit");
 		helper.succeed();
+	}
+
+	@GameTest(template = EMPTY_STRUCTURE, batch = "bunker_leakage", skyAccess = true, timeoutTicks = 80)
+	public void leakyBunkerAndLeadedDoorControlRadiationShielding(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		for (int dx = 2; dx <= 6; dx++) {
+			for (int dz = 2; dz <= 6; dz++) {
+				helper.setBlock(dx, 1, dz, ModBlocks.LEAD_CONCRETE);
+				helper.setBlock(dx, 4, dz, ModBlocks.LEADED_GLASS);
+				boolean edge = dx == 2 || dx == 6 || dz == 2 || dz == 6;
+				if (edge) {
+					boolean corner = (dx == 2 || dx == 6) && (dz == 2 || dz == 6);
+					Block wall = corner ? ModBlocks.LEAD_CONCRETE : ModBlocks.LEADED_GLASS;
+					helper.setBlock(dx, 2, dz, wall);
+					helper.setBlock(dx, 3, dz, wall);
+				}
+			}
+		}
+		// Install closed Lead Reinforced Door on north wall (dx=4, dz=2)
+		helper.setBlock(new BlockPos(4, 2, 2), ModBlocks.LEADED_DOOR.defaultBlockState()
+			.setValue(DoorBlock.FACING, Direction.SOUTH)
+			.setValue(DoorBlock.HALF, DoubleBlockHalf.LOWER)
+			.setValue(DoorBlock.OPEN, false));
+		helper.setBlock(new BlockPos(4, 3, 2), ModBlocks.LEADED_DOOR.defaultBlockState()
+			.setValue(DoorBlock.FACING, Direction.SOUTH)
+			.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER)
+			.setValue(DoorBlock.OPEN, false));
+
+		BlockPos eyeAbs = helper.absolutePos(new BlockPos(4, 3, 4));
+		RadiationShelterChecker.ShelterAssessment sealed = RadiationShelterChecker.evaluateShelter(level, eyeAbs);
+		helper.assertTrue(sealed.isFullySealed(), "Sealed bunker with closed Leaded Door must have 0% leak, got " + sealed.leakagePercent());
+
+		// Open door -> must immediately register leak!
+		helper.setBlock(new BlockPos(4, 2, 2), ModBlocks.LEADED_DOOR.defaultBlockState()
+			.setValue(DoorBlock.FACING, Direction.SOUTH)
+			.setValue(DoorBlock.HALF, DoubleBlockHalf.LOWER)
+			.setValue(DoorBlock.OPEN, true));
+		helper.setBlock(new BlockPos(4, 3, 2), ModBlocks.LEADED_DOOR.defaultBlockState()
+			.setValue(DoorBlock.FACING, Direction.SOUTH)
+			.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER)
+			.setValue(DoorBlock.OPEN, true));
+		RadiationShelterChecker.ShelterAssessment doorOpen = RadiationShelterChecker.evaluateShelter(level, eyeAbs);
+		helper.assertTrue(!doorOpen.isFullySealed() && doorOpen.leakagePercent() > 0.0, "Opening Leaded Door must leak radiation");
+
+		// Re-close door, then punch 1 glass hole vs wider breach
+		helper.setBlock(new BlockPos(4, 2, 2), ModBlocks.LEADED_DOOR.defaultBlockState()
+			.setValue(DoorBlock.FACING, Direction.SOUTH)
+			.setValue(DoorBlock.HALF, DoubleBlockHalf.LOWER)
+			.setValue(DoorBlock.OPEN, false));
+		helper.setBlock(new BlockPos(4, 3, 2), ModBlocks.LEADED_DOOR.defaultBlockState()
+			.setValue(DoorBlock.FACING, Direction.SOUTH)
+			.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER)
+			.setValue(DoorBlock.OPEN, false));
+		helper.setBlock(new BlockPos(2, 3, 4), Blocks.AIR);
+		RadiationShelterChecker.ShelterAssessment oneHole = RadiationShelterChecker.evaluateShelter(level, eyeAbs);
+		helper.assertTrue(!oneHole.isFullySealed() && oneHole.leakagePercent() > 0.0,
+			"Punching 1 wall block must report non-zero leak, got " + oneHole.leakagePercent());
+
+		helper.setBlock(new BlockPos(2, 3, 3), Blocks.AIR);
+		helper.setBlock(new BlockPos(2, 3, 5), Blocks.AIR);
+		helper.setBlock(new BlockPos(2, 2, 3), Blocks.AIR);
+		helper.setBlock(new BlockPos(2, 2, 4), Blocks.AIR);
+		helper.setBlock(new BlockPos(2, 2, 5), Blocks.AIR);
+		RadiationShelterChecker.ShelterAssessment bigBreach = RadiationShelterChecker.evaluateShelter(level, eyeAbs);
+		helper.assertTrue(bigBreach.leakagePercent() > oneHole.leakagePercent(),
+			"Wider wall breach must produce greater leak (" + bigBreach.leakagePercent() + " <= " + oneHole.leakagePercent() + ")");
+
+		helper.succeed();
+	}
+
+	@GameTest(template = EMPTY_STRUCTURE, batch = "structure_assembler", timeoutTicks = 80)
+	public void structureAssemblerBuildsPersonalAndFlagsObstacles(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		BlockPos coreRel = new BlockPos(4, 5, 4);
+		BlockPos coreAbs = helper.absolutePos(coreRel);
+		helper.setBlock(coreRel, ModBlocks.WORMHOLE_CORE);
+		// Place an obstructing stone block inside required clear portal slot (0, -2, 0)
+		helper.setBlock(coreRel.offset(0, -2, 0), Blocks.STONE);
+
+		Player builder = helper.makeMockPlayer(GameType.SURVIVAL);
+		ItemStack wrench = new ItemStack(ModItems.STRUCTURE_ASSEMBLER);
+		builder.getInventory().add(new ItemStack(ModBlocks.WORMHOLE_INJECTOR, 1));
+		builder.getInventory().add(new ItemStack(ModBlocks.LEAD_CONCRETE, 16));
+		builder.getInventory().add(new ItemStack(ModBlocks.WORMHOLE_STABILIZER_PYLON, 4));
+
+		WormholeAssemblerCalculator.ScanResult scanWithRock = WormholeAssemblerCalculator.scan(level, coreAbs, WormholeTier.PERSONAL);
+		helper.assertTrue(scanWithRock.obstructions().size() == 1, "Expected 1 clear-zone stone obstruction");
+
+		// Click repeatedly with Structure Assembler until all 21 blocks are placed from inventory
+		for (int i = 0; i < 25; i++) {
+			StructureAssemblerItem.assembleOnCore(level, coreAbs, builder, wrench);
+		}
+		helper.assertTrue(StructureAssemblerItem.countBlockItem(builder, ModBlocks.LEAD_CONCRETE) == 0, "Expected 16 Lead Concrete consumed");
+		helper.assertTrue(StructureAssemblerItem.countBlockItem(builder, ModBlocks.WORMHOLE_STABILIZER_PYLON) == 0, "Expected 4 Pylons consumed");
+		helper.assertFalse(WormholeMultiblockValidator.validate(level, coreAbs).valid(), "Stone obstacle should still fail validation until mined");
+
+		// Clear the obstructing stone and verify validation passes 100%
+		helper.setBlock(coreRel.offset(0, -2, 0), Blocks.AIR);
+		helper.assertTrue(WormholeMultiblockValidator.validate(level, coreAbs).valid(), "Structure should validate once obstacle is cleared");
+		helper.succeed();
+	}
+
+	@GameTest(template = EMPTY_STRUCTURE, batch = "mars_stability", timeoutTicks = 120)
+	public void marsBreathableStays100PercentDuringRedGiantCountdown(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ModConfig.get().setMarsTerraformingTestMode(true);
+		MarsTerraformingState state = MarsTerraformingState.get(level);
+		state.setPercents(100.0f, 100.0f, 100.0f);
+		state.activateRedGiant(level, true);
+		state.setStormPhaseForTesting(level, SolarStormPhase.COUNTDOWN);
+
+		helper.runAfterDelay(50, () -> {
+			MarsProgressSnapshot snap = state.snapshot();
+			boolean ok = snap.breathable() && snap.oxygenPercent() >= 100.0f && Math.round(snap.terraformingIndex()) == 70000L;
+			ModConfig.get().setMarsTerraformingTestMode(false);
+			state.activateRedGiant(level, false);
+			helper.assertTrue(ok, "Calm Red Giant countdown must not strip 100% Ti=70000 down to Flora flicker, got Ti="
+				+ Math.round(snap.terraformingIndex()) + " O2=" + snap.oxygenPercent());
+			helper.succeed();
+		});
 	}
 
 	private static void buildWormholeFrame(GameTestHelper helper, BlockPos corePos) {

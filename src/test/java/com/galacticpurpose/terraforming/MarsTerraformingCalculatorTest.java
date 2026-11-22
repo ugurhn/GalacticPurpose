@@ -37,6 +37,9 @@ class MarsTerraformingCalculatorTest {
 		assertTrue(fullOxygen.meteorCalm());
 		assertTrue(fullOxygen.breathable());
 		assertEquals(100.0f, fullOxygen.oxygenPercent(), 0.001f);
+
+		MarsProgressSnapshot edgeFull = MarsTerraformingCalculator.snapshot(10000.0, 10000.0, 9995.0);
+		assertTrue(edgeFull.breathable(), "99.95%+ O2 rounding to 100.0% must remain breathable without flicker");
 	}
 
 	@Test

@@ -21,6 +21,20 @@ public final class SolarStormCalculator {
 		boolean hasLeadSuit,
 		boolean deepUnderground
 	) {
+		return evaluateWithLeakage(
+			redGiantActive,
+			stormElapsedTicks,
+			(exposedToRadiation && !deepUnderground) ? 1.0 : 0.0,
+			hasLeadSuit
+		);
+	}
+
+	public static StormSnapshot evaluateWithLeakage(
+		boolean redGiantActive,
+		long stormElapsedTicks,
+		double leakFraction,
+		boolean hasLeadSuit
+	) {
 		if (!redGiantActive) {
 			return StormSnapshot.dormant();
 		}
@@ -29,8 +43,10 @@ public final class SolarStormCalculator {
 
 		if (cycleSec >= IMPACT_START_SECOND) {
 			int remaining = CYCLE_SECONDS - cycleSec;
-			boolean shielded = !exposedToRadiation || hasLeadSuit || deepUnderground;
-			float damage = shielded ? 0.0f : BASE_RADIATION_DAMAGE;
+			double clampedLeak = Math.max(0.0, Math.min(1.0, leakFraction));
+			float damage = (hasLeadSuit || clampedLeak <= 0.001)
+				? 0.0f
+				: Math.max(0.45f, (float) (BASE_RADIATION_DAMAGE * clampedLeak));
 			return new StormSnapshot(SolarStormPhase.ACTIVE, 0, remaining, damage);
 		}
 

@@ -94,18 +94,89 @@ public final class MarsTerraformingState extends SavedData {
 			state.activateRedGiant(level, true);
 		}
 
-		// 4. Red Giant stripping & Solar Storm radiation loop (1 Hz)
+		// 4. Red Giant Solar Storm cycle, atmospheric CME stripping & impact effects
 		if (state.redGiantActive) {
 			state.stormCycleTicks++;
+			StormSnapshot currentStorm = SolarStormCalculator.evaluate(
+				true,
+				state.stormCycleTicks,
+				true,
+				false,
+				false
+			);
+			if (currentStorm.phase() == SolarStormPhase.ACTIVE && level.getGameTime() % 4L == 0L) {
+				spawnSolarStormImpactParticles(level);
+			} else if (currentStorm.phase() == SolarStormPhase.WARNING && level.getGameTime() % 20L == 0L) {
+				spawnSolarStormWarningParticles(level);
+			}
 			if (level.getGameTime() % 20L == 0L) {
-				// Solar wind strips Mars atmosphere back toward space unless machines hold it up.
-				state.addProgress(-1.5, -2.0, -2.5);
+				// CME plasma impact strips exposed Martian atmosphere only while the storm is actively striking.
+				if (currentStorm.phase() == SolarStormPhase.ACTIVE) {
+					state.addProgress(-1.5, -2.0, -2.5);
+				}
 				state.evaluateAndApplySolarStorm(level);
 				state.setDirty();
 				state.syncDimension(level);
 			}
 		} else if (level.getGameTime() % 40L == 0L) {
 			state.syncDimensionIfThrottled(level);
+		}
+	}
+
+	private static void spawnSolarStormWarningParticles(ServerLevel level) {
+		for (ServerPlayer player : level.players()) {
+			if (!player.isAlive()) {
+				continue;
+			}
+			for (int i = 0; i < 6; i++) {
+				double ox = (level.random.nextDouble() - 0.5) * 28.0;
+				double oz = (level.random.nextDouble() - 0.5) * 28.0;
+				double oy = 8.0 + level.random.nextDouble() * 14.0;
+				level.sendParticles(
+					net.minecraft.core.particles.ParticleTypes.ELECTRIC_SPARK,
+					player.getX() + ox,
+					player.getY() + oy,
+					player.getZ() + oz,
+					2,
+					0.4,
+					0.4,
+					0.4,
+					0.08
+				);
+			}
+		}
+	}
+
+	private static void spawnSolarStormImpactParticles(ServerLevel level) {
+		for (ServerPlayer player : level.players()) {
+			if (!player.isAlive()) {
+				continue;
+			}
+			for (int i = 0; i < 10; i++) {
+				double ox = (level.random.nextDouble() - 0.5) * 24.0;
+				double oz = (level.random.nextDouble() - 0.5) * 24.0;
+				double oy = 3.0 + level.random.nextDouble() * 13.0;
+				double px = player.getX() + ox;
+				double py = player.getY() + oy;
+				double pz = player.getZ() + oz;
+				BlockPos hitPos = BlockPos.containing(px, py, pz);
+				if (RadiationShelterChecker.isPositionShielded(level, hitPos)) {
+					continue;
+				}
+				level.sendParticles(
+					(i % 2 == 0)
+						? net.minecraft.core.particles.ParticleTypes.FLAME
+						: net.minecraft.core.particles.ParticleTypes.ELECTRIC_SPARK,
+					px,
+					py,
+					pz,
+					1,
+					0.15,
+					-0.35,
+					0.15,
+					0.18
+				);
+			}
 		}
 	}
 
@@ -125,11 +196,13 @@ public final class MarsTerraformingState extends SavedData {
 					"message.galacticpurpose.storm_warning",
 					storm.secondsUntilImpact()
 				).withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD));
+				broadcastSound(level, com.galacticpurpose.network.ClientSoundEventPayload.EVENT_STORM_WARNING, 0.72f, 1.0f);
 			} else if (storm.phase() == SolarStormPhase.ACTIVE) {
 				broadcastToDimension(level, Component.translatable(
 					"message.galacticpurpose.storm_active",
 					storm.secondsRemaining()
 				).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+				broadcastSound(level, com.galacticpurpose.network.ClientSoundEventPayload.EVENT_STORM_STRIKE, 0.80f, 0.92f);
 			} else if (storm.phase() == SolarStormPhase.COUNTDOWN) {
 				broadcastToDimension(level, Component.translatable("message.galacticpurpose.storm_cleared")
 					.withStyle(ChatFormatting.AQUA));
@@ -141,19 +214,32 @@ public final class MarsTerraformingState extends SavedData {
 		}
 
 		for (ServerPlayer player : level.players()) {
-			if (player.isCreative() || player.isSpectator() || !player.isAlive()) {
+			if (!player.isAlive()) {
 				continue;
 			}
 			BlockPos eyePos = BlockPos.containing(player.getX(), player.getEyeY(), player.getZ());
-			boolean shielded = RadiationShelterChecker.isPositionShielded(level, eyePos);
+			RadiationShelterChecker.ShelterAssessment shelter = RadiationShelterChecker.evaluateShelter(level, eyePos);
 			boolean leadSuit = LeadArmorItem.hasFullSuit(player);
 
-			StormSnapshot playerStorm = SolarStormCalculator.evaluate(
+			if (!leadSuit && shelter.leakagePercent() > 0.01 && shelter.leakagePercent() < 99.99) {
+				player.displayClientMessage(
+					Component.translatable(
+						"message.galacticpurpose.storm_breach_warning",
+						Math.max(1, Math.round((float) shelter.leakagePercent()))
+					).withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD),
+					true
+				);
+			}
+
+			if (player.isCreative() || player.isSpectator()) {
+				continue;
+			}
+
+			StormSnapshot playerStorm = SolarStormCalculator.evaluateWithLeakage(
 				this.redGiantActive,
 				this.stormCycleTicks,
-				!shielded,
-				leadSuit,
-				false
+				shelter.leakagePercent() / 100.0,
+				leadSuit
 			);
 			if (playerStorm.radiationDamage() > 0.0f) {
 				player.hurt(
@@ -161,6 +247,14 @@ public final class MarsTerraformingState extends SavedData {
 					playerStorm.radiationDamage()
 				);
 			}
+		}
+	}
+
+	private static void broadcastSound(ServerLevel level, int soundEventId, float volume, float pitch) {
+		com.galacticpurpose.network.ClientSoundEventPayload payload =
+			new com.galacticpurpose.network.ClientSoundEventPayload(soundEventId, volume, pitch);
+		for (ServerPlayer player : level.players()) {
+			ServerPlayNetworking.send(player, payload);
 		}
 	}
 
@@ -268,9 +362,8 @@ public final class MarsTerraformingState extends SavedData {
 	}
 
 	public void syncDimension(ServerLevel level) {
-		MarsSyncPayload payload = toPayload();
 		for (ServerPlayer player : level.players()) {
-			ServerPlayNetworking.send(player, payload);
+			ServerPlayNetworking.send(player, toPayload(level, player));
 		}
 	}
 
@@ -280,10 +373,10 @@ public final class MarsTerraformingState extends SavedData {
 			ServerPlayNetworking.send(player, MarsSyncPayload.inactive());
 			return;
 		}
-		ServerPlayNetworking.send(player, get(level).toPayload());
+		ServerPlayNetworking.send(player, get(level).toPayload(level, player));
 	}
 
-	private MarsSyncPayload toPayload() {
+	private MarsSyncPayload toPayload(ServerLevel level, ServerPlayer player) {
 		StormSnapshot storm = SolarStormCalculator.evaluate(
 			this.redGiantActive,
 			this.stormCycleTicks,
@@ -294,6 +387,11 @@ public final class MarsTerraformingState extends SavedData {
 		int timer = storm.phase() == SolarStormPhase.ACTIVE
 			? storm.secondsRemaining()
 			: storm.secondsUntilImpact();
+		float leakPct = 100.0f;
+		if (player != null) {
+			BlockPos eyePos = BlockPos.containing(player.getX(), player.getEyeY(), player.getZ());
+			leakPct = (float) RadiationShelterChecker.evaluateShelter(level, eyePos).leakagePercent();
+		}
 		return new MarsSyncPayload(
 			true,
 			(float) this.heatPoints,
@@ -301,7 +399,8 @@ public final class MarsTerraformingState extends SavedData {
 			(float) this.oxygenPoints,
 			this.redGiantActive,
 			storm.phase().ordinal(),
-			timer
+			timer,
+			leakPct
 		);
 	}
 }

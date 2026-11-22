@@ -6,7 +6,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 /**
- * Server-to-client snapshot syncing Mars terraforming values, Red Giant phase, and Solar Storm telemetry.
+ * Server-to-client snapshot syncing Mars terraforming values, Red Giant phase, Solar Storm telemetry,
+ * and live player bunker shelter leakage risk (0 = sealed, 100 = exposed).
  */
 public record MarsSyncPayload(
 	boolean activeInDimension,
@@ -15,7 +16,8 @@ public record MarsSyncPayload(
 	float oxygenPoints,
 	boolean redGiantActive,
 	int stormPhaseOrdinal,
-	int stormTimerSeconds
+	int stormTimerSeconds,
+	float shelterLeakPercent
 ) implements CustomPacketPayload {
 
 	public static final Type<MarsSyncPayload> TYPE =
@@ -32,6 +34,7 @@ public record MarsSyncPayload(
 		buf.writeBoolean(this.redGiantActive);
 		buf.writeVarInt(this.stormPhaseOrdinal);
 		buf.writeVarInt(this.stormTimerSeconds);
+		buf.writeFloat(this.shelterLeakPercent);
 	}
 
 	private static MarsSyncPayload read(RegistryFriendlyByteBuf buf) {
@@ -42,12 +45,13 @@ public record MarsSyncPayload(
 			buf.readFloat(),
 			buf.readBoolean(),
 			buf.readVarInt(),
-			buf.readVarInt()
+			buf.readVarInt(),
+			buf.readFloat()
 		);
 	}
 
 	public static MarsSyncPayload inactive() {
-		return new MarsSyncPayload(false, 0.0f, 0.0f, 0.0f, false, 0, 0);
+		return new MarsSyncPayload(false, 0.0f, 0.0f, 0.0f, false, 0, 0, 100.0f);
 	}
 
 	@Override

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "pattern": [
+    " LI",
+    " RL",
+    "L  "
+  ],
+  "key": {
+    "L": { "tag": "c:ingots/lead" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": {
+    "count": 1,
+    "id": "galacticpurpose:structure_assembler"
+  }
+}

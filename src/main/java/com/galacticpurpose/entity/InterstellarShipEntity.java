@@ -561,6 +561,10 @@ public class InterstellarShipEntity extends Entity implements ExtendedScreenHand
 		this.entityData.set(DATA_VECTOR_ANGLE, 0.0f);
 		keepCorridorChunksEntityTicking(serverLevel, this.getX(), this.getZ());
 		keepCorridorChunksEntityTicking(serverLevel, targetX, targetZ);
+		float initYawRad = (float) Math.toRadians(this.getYRot());
+		double turnClearX = this.getX() - Math.sin(initYawRad) * 28.0;
+		double turnClearZ = this.getZ() + Math.cos(initYawRad) * 28.0;
+		keepCorridorChunksEntityTicking(serverLevel, turnClearX, turnClearZ);
 
 		if (commander != null) {
 			sendSoundEvent(commander, ClientSoundEventPayload.EVENT_AUTOPILOT_ENGAGE, 0.68f, 1.08f);
@@ -939,7 +943,8 @@ public class InterstellarShipEntity extends Entity implements ExtendedScreenHand
 
 	private static void keepCorridorChunksEntityTicking(ServerLevel level, double x, double z) {
 		ChunkPos chunkPos = new ChunkPos(Mth.floor(x) >> 4, Mth.floor(z) >> 4);
-		level.getChunkSource().addRegionTicket(RELOCATE_TICKET, chunkPos, 3, chunkPos);
+		level.getChunkSource().addRegionTicket(RELOCATE_TICKET, chunkPos, 4, chunkPos);
+		level.getChunk(chunkPos.x, chunkPos.z);
 	}
 
 	private void consumeRelocateFuelProgress(int targetBurn) {
@@ -959,6 +964,8 @@ public class InterstellarShipEntity extends Entity implements ExtendedScreenHand
 		this.relocateTicks++;
 
 		if (this.relocateSubPhase == 0) {
+			float yawRad = (float) Math.toRadians(this.getYRot());
+			keepCorridorChunksEntityTicking(level, this.getX() - Math.sin(yawRad) * 24.0, this.getZ() + Math.cos(yawRad) * 24.0);
 			float spool = Mth.clamp(this.relocateTicks / 60.0f, 0.0f, 1.0f);
 			this.entityData.set(DATA_THRUST, 0.22f + spool * 0.35f);
 			this.entityData.set(DATA_LEG_DEPLOY, 1.0f);
@@ -1003,7 +1010,7 @@ public class InterstellarShipEntity extends Entity implements ExtendedScreenHand
 		float yawRad = (float) Math.toRadians(this.getYRot());
 		double fwdX = -Math.sin(yawRad);
 		double fwdZ = Math.cos(yawRad);
-		level.getChunk(Mth.floor(this.getX() + fwdX * 16.0) >> 4, Mth.floor(this.getZ() + fwdZ * 16.0) >> 4);
+		keepCorridorChunksEntityTicking(level, this.getX() + fwdX * 24.0, this.getZ() + fwdZ * 24.0);
 
 		double takeOffRoll = Mth.clamp(this.relocateTicks / 18.0, 0.0, 1.0);
 		double cruiseMax = Mth.clamp(Math.max(horizDist, Math.abs(rawErr) * 0.28) * 0.034, 0.56, 1.45);

@@ -471,5 +471,21 @@
   "message.galacticpurpose.wormhole_small_no_transit": "[PROTOTYPE] The 7x4x7 Core cannot carry human mass! Build the 45x41x45 Colossal Observatory and fly through inside a Horizon Lander.",
   "message.galacticpurpose.wormhole_enter_via_ship": "[GATEWAY LOCKED] Board your Horizon Lander on the runway and press [SPACE x2] or [G] to fly through!",
   "key.categories.galacticpurpose": "Galactic Purpose",
-  "key.galacticpurpose.ship_action": "Horizon Lander Launch / Descend"
+  "key.galacticpurpose.ship_action": "Horizon Lander Launch / Descend",
+  "block.galacticpurpose.leaded_door": "Lead Reinforced Door",
+  "item.galacticpurpose.structure_assembler": "Wormhole Structure Assembler",
+  "tooltip.galacticpurpose.structure_assembler_mode": "Target Multiblock: %s",
+  "tooltip.galacticpurpose.structure_assembler_hint_1": "Right-click a Wormhole Core repeatedly to auto-build from inventory",
+  "tooltip.galacticpurpose.structure_assembler_hint_2": "Shift+Right-click or Right-click air to switch Personal / Colossal mode",
+  "message.galacticpurpose.assembler_mode": "[Assembler] Mode set to %s (%s blocks required)",
+  "message.galacticpurpose.assembler_progress": "[Assembler • %s] %s / %s placed (+%s)",
+  "message.galacticpurpose.assembler_obstruction": "[OBSTRUCTION] %s blocking block(s) — first: %s at (%s, %s, %s)",
+  "message.galacticpurpose.assembler_needed_prefix": "Remaining: ",
+  "message.galacticpurpose.assembler_complete": "[Assembler • %s] Structure 100%% complete and VALIDATED! Right-click Core to operate.",
+  "message.galacticpurpose.telemetry_leaky": "LEAKING SHIELD (%s%% risk!)",
+  "message.galacticpurpose.telemetry_leaky_pos": "LEAKING SHIELD (%s%% risk — breach near %s, %s, %s!)",
+  "message.galacticpurpose.storm_breach_warning": "[BREACH ALERT] Radiation leaking (%s%%) through gap/door — seal shelter!",
+  "hud.galacticpurpose.shelter_sealed": "Shield: SEALED (0% leak)",
+  "hud.galacticpurpose.shelter_leaky": "Shield: LEAKING (%s%% risk!)",
+  "hud.galacticpurpose.shelter_exposed": "Shield: EXPOSED (100%)"
 }

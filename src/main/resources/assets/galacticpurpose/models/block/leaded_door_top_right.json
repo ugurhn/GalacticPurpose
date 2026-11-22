@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "galacticpurpose:block/leaded_door_bottom",
+    "top": "galacticpurpose:block/leaded_door_top"
+  }
+}

@@ -15,6 +15,7 @@ public final class ClientMarsState {
 	private static boolean redGiantActive = false;
 	private static SolarStormPhase stormPhase = SolarStormPhase.DORMANT;
 	private static int stormTimerSeconds = 0;
+	private static float shelterLeakPercent = 100.0f;
 
 	private ClientMarsState() {
 	}
@@ -29,6 +30,7 @@ public final class ClientMarsState {
 		redGiantActive = payload.redGiantActive();
 		stormPhase = SolarStormPhase.byOrdinal(payload.stormPhaseOrdinal());
 		stormTimerSeconds = payload.stormTimerSeconds();
+		shelterLeakPercent = payload.shelterLeakPercent();
 		SpaceCompatManager.setClientMarsBreathable(activeInDimension && snapshot.breathable());
 	}
 
@@ -38,6 +40,7 @@ public final class ClientMarsState {
 		redGiantActive = false;
 		stormPhase = SolarStormPhase.DORMANT;
 		stormTimerSeconds = 0;
+		shelterLeakPercent = 100.0f;
 		SpaceCompatManager.setClientMarsBreathable(false);
 	}
 
@@ -59,5 +62,9 @@ public final class ClientMarsState {
 
 	public static int getStormTimerSeconds() {
 		return stormTimerSeconds;
+	}
+
+	public static float getShelterLeakPercent() {
+		return shelterLeakPercent;
 	}
 }

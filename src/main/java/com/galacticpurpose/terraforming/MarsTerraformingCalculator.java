@@ -31,7 +31,7 @@ public final class MarsTerraformingCalculator {
 		boolean waterReady = heatPct >= 35.0f && pressurePct >= 30.0f;
 		boolean floraReady = heatPct >= 45.0f && pressurePct >= 40.0f && oxygenPct >= 25.0f;
 		boolean meteorCalm = pressurePct >= 75.0f;
-		boolean breathable = oxygenPct >= 100.0f;
+		boolean breathable = oxygenPct >= 99.95f;
 
 		return new MarsProgressSnapshot(
 			heat,

@@ -15,6 +15,8 @@ public record ClientSoundEventPayload(int eventId, float volume, float pitch) im
 	public static final int EVENT_HYDRAULIC_TOUCHDOWN = 3;
 	public static final int EVENT_ABORT_ALARM = 4;
 	public static final int EVENT_AUTOPILOT_ENGAGE = 5;
+	public static final int EVENT_STORM_WARNING = 6;
+	public static final int EVENT_STORM_STRIKE = 7;
 
 	public static final Type<ClientSoundEventPayload> TYPE =
 		new Type<>(GalacticPurpose.id("client_sound_event"));

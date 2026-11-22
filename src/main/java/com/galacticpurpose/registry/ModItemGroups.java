@@ -42,6 +42,7 @@ public final class ModItemGroups {
 				output.accept(ModBlocks.CRYO_BEACON);
 				output.accept(ModBlocks.LEAD_CONCRETE);
 				output.accept(ModBlocks.LEADED_GLASS);
+				output.accept(ModBlocks.LEADED_DOOR);
 				output.accept(ModBlocks.MARS_BIO_BLOOM);
 				output.accept(ModItems.RAW_LEAD);
 				output.accept(ModItems.LEAD_INGOT);
@@ -50,6 +51,7 @@ public final class ModItemGroups {
 				output.accept(ModItems.STARSHIP_FUEL_CELL);
 				output.accept(ModItems.STARSHIP_BLUEPRINT);
 				output.accept(ModItems.FLIGHT_DIRECTOR);
+				output.accept(ModItems.STRUCTURE_ASSEMBLER);
 				// Starship & Space Engineering Blocks
 				output.accept(ModBlocks.SHIP_ASSEMBLY_PAD);
 				output.accept(ModBlocks.STARSHIP_HELM);

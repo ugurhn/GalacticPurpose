@@ -554,4 +554,147 @@ public final class ProceduralAudioStreams {
 			this.closed = true;
 		}
 	}
+
+	/**
+	 * Ear-safe aerospace solar flare warning cadence (1.1s) announcing an imminent Red Giant CME wave.
+	 */
+	public static final class SolarStormAlertStream implements AudioStream {
+		private static final int TOTAL_SAMPLES = (int) (SAMPLE_RATE * 1.15f);
+		private int cursor = 0;
+		private boolean closed = false;
+
+		@Override
+		public AudioFormat getFormat() {
+			return MONO_16_PCM;
+		}
+
+		@Override
+		public ByteBuffer read(int size) {
+			if (this.closed || this.cursor >= TOTAL_SAMPLES) {
+				return null;
+			}
+			int sampleCount = Math.min(TOTAL_SAMPLES - this.cursor, Math.max(256, size / 2));
+			ByteBuffer buf = BufferUtils.createByteBuffer(sampleCount * 2);
+			for (int i = 0; i < sampleCount; i++) {
+				double t = this.cursor / (double) SAMPLE_RATE;
+				this.cursor++;
+				double segT = t % 0.36;
+				double pulse = (t < 1.05 && segT < 0.24)
+					? Math.sin(Math.PI * segT / 0.24) * 0.90
+					: 0.0;
+				double freq = ((int) (t / 0.36) % 2 == 0) ? 587.33 : 440.00;
+				double wave = (Math.sin(2.0 * Math.PI * freq * t) * 0.65
+					+ Math.sin(4.0 * Math.PI * freq * t) * 0.18) * pulse * 0.55;
+				short pcm = (short) Math.max(-32767, Math.min(32767, Math.round(wave * 32767.0)));
+				buf.putShort(pcm);
+			}
+			buf.flip();
+			return buf;
+		}
+
+		@Override
+		public void close() {
+			this.closed = true;
+		}
+	}
+
+	/**
+	 * Geomagnetic CME shockwave onset thump + ionic sweep (2.2s) played as Solar Storm strikes Mars.
+	 */
+	public static final class SolarStormStrikePulseStream implements AudioStream {
+		private static final int TOTAL_SAMPLES = (int) (SAMPLE_RATE * 2.2f);
+		private int cursor = 0;
+		private double subPhase = 0.0;
+		private double lp = 0.0;
+		private int rng = 0x41F29D03;
+		private boolean closed = false;
+
+		@Override
+		public AudioFormat getFormat() {
+			return MONO_16_PCM;
+		}
+
+		@Override
+		public ByteBuffer read(int size) {
+			if (this.closed || this.cursor >= TOTAL_SAMPLES) {
+				return null;
+			}
+			int sampleCount = Math.min(TOTAL_SAMPLES - this.cursor, Math.max(256, size / 2));
+			ByteBuffer buf = BufferUtils.createByteBuffer(sampleCount * 2);
+			for (int i = 0; i < sampleCount; i++) {
+				double t = this.cursor / (double) SAMPLE_RATE;
+				this.cursor++;
+				this.rng ^= (this.rng << 13);
+				this.rng ^= (this.rng >>> 17);
+				this.rng ^= (this.rng << 5);
+				double white = this.rng / (double) Integer.MAX_VALUE;
+				this.lp = this.lp * 0.965 + white * 0.035;
+				double f = 46.0 + 130.0 * Math.exp(-t * 3.8);
+				this.subPhase += (2.0 * Math.PI * f) / SAMPLE_RATE;
+				double env = Math.min(1.0, t * 28.0) * Math.exp(-t * 1.45);
+				double wave = (Math.sin(this.subPhase) * 0.62 + this.lp * 2.6 * Math.exp(-t * 0.9)) * env * 0.72;
+				short pcm = (short) Math.max(-32767, Math.min(32767, Math.round(Math.tanh(wave) * 32767.0)));
+				buf.putShort(pcm);
+			}
+			buf.flip();
+			return buf;
+		}
+
+		@Override
+		public void close() {
+			this.closed = true;
+		}
+	}
+
+	/**
+	 * Continuous ear-safe solar wind magnetosphere roar + intermittent Geiger ticks during active CME storms.
+	 */
+	public static final class SolarStormImpactLoopStream implements AudioStream {
+		private long sampleIndex = 0L;
+		private double windLp = 0.0;
+		private double clickEnv = 0.0;
+		private int rng = 0x9C318F11;
+		private boolean closed = false;
+
+		@Override
+		public AudioFormat getFormat() {
+			return MONO_16_PCM;
+		}
+
+		@Override
+		public ByteBuffer read(int size) {
+			if (this.closed) {
+				return null;
+			}
+			int sampleCount = Math.max(256, size / 2);
+			ByteBuffer buf = BufferUtils.createByteBuffer(sampleCount * 2);
+			for (int i = 0; i < sampleCount; i++) {
+				double t = this.sampleIndex / (double) SAMPLE_RATE;
+				this.sampleIndex++;
+				this.rng ^= (this.rng << 13);
+				this.rng ^= (this.rng >>> 17);
+				this.rng ^= (this.rng << 5);
+				double white = this.rng / (double) Integer.MAX_VALUE;
+				this.windLp = this.windLp * 0.978 + white * 0.022;
+				if ((this.rng & 0xFFF) < 11) {
+					this.clickEnv = 1.0;
+				}
+				this.clickEnv *= 0.945;
+				double swell = 0.65 + 0.35 * Math.sin(2.0 * Math.PI * 0.22 * t);
+				double sub = Math.sin(2.0 * Math.PI * 48.0 * t) * 0.22 * swell;
+				double wind = this.windLp * 2.4 * swell;
+				double geiger = white * this.clickEnv * 0.24;
+				double mixed = Math.tanh((sub + wind + geiger) * 0.85) * 0.58;
+				short pcm = (short) Math.max(-32767, Math.min(32767, Math.round(mixed * 32767.0)));
+				buf.putShort(pcm);
+			}
+			buf.flip();
+			return buf;
+		}
+
+		@Override
+		public void close() {
+			this.closed = true;
+		}
+	}
 }

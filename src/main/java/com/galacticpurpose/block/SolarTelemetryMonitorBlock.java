@@ -45,15 +45,30 @@ public class SolarTelemetryMonitorBlock extends Block {
 			return InteractionResult.SUCCESS;
 		}
 
-		boolean shielded = RadiationShelterChecker.isPositionShielded(
+		RadiationShelterChecker.ShelterAssessment assessment = RadiationShelterChecker.evaluateShelter(
 			serverLevel,
 			BlockPos.containing(player.getX(), player.getEyeY(), player.getZ())
 		);
-		Component shelterText = Component.translatable(
-			shielded
-				? "message.galacticpurpose.telemetry_shielded"
-				: "message.galacticpurpose.telemetry_unshielded"
-		).withStyle(shielded ? ChatFormatting.GREEN : ChatFormatting.RED);
+		Component shelterText = switch (assessment.status()) {
+			case SEALED -> Component.translatable("message.galacticpurpose.telemetry_shielded")
+				.withStyle(ChatFormatting.GREEN);
+			case LEAKY -> {
+				int leakRounded = Math.max(1, Math.round((float) assessment.leakagePercent()));
+				BlockPos breach = assessment.sampleBreachPos();
+				yield breach != null
+					? Component.translatable(
+						"message.galacticpurpose.telemetry_leaky_pos",
+						leakRounded,
+						breach.getX(),
+						breach.getY(),
+						breach.getZ()
+					).withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD)
+					: Component.translatable("message.galacticpurpose.telemetry_leaky", leakRounded)
+						.withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD);
+			}
+			case EXPOSED -> Component.translatable("message.galacticpurpose.telemetry_unshielded")
+				.withStyle(ChatFormatting.RED);
+		};
 
 		if (!SpaceCompatManager.get().isMars(serverLevel)) {
 			player.displayClientMessage(

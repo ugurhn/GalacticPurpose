@@ -64,6 +64,7 @@ public class GalacticPurposeClient implements ClientModInitializer {
 		MenuScreens.register(ModMenus.WORMHOLE_CORE, WormholeCoreScreen::new);
 		MenuScreens.register(ModMenus.STARSHIP, StarshipScreen::new);
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LEADED_GLASS, RenderType.translucent());
+		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LEADED_DOOR, RenderType.translucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.REINFORCED_VIEWPORT_GLASS, RenderType.translucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WORMHOLE_PORTAL, RenderType.translucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MARS_BIO_BLOOM, RenderType.cutout());
@@ -81,6 +82,7 @@ public class GalacticPurposeClient implements ClientModInitializer {
 		StarshipCockpitHud.registerKeyBindings();
 		com.galacticpurpose.client.sound.NasaAudioBank.preloadAllAsync();
 		MissionCodexItem.setClientHooks(MissionCodexScreen::open, WormholeHologramRenderer::toggleAt);
+		com.galacticpurpose.item.StructureAssemblerItem.setClientHologramStarter(WormholeHologramRenderer::ensureShown);
 		WorldRenderEvents.AFTER_TRANSLUCENT.register(WormholeHologramRenderer::render);
 		WorldRenderEvents.AFTER_TRANSLUCENT.register(OrbitalShipPlumeRenderer::render);
 		ClientTickEvents.END_CLIENT_TICK.register(ClientSoundController::tick);

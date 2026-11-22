@@ -40,5 +40,11 @@ class SolarStormCalculatorTest {
 
 		StormSnapshot activeDeepUnderground = SolarStormCalculator.evaluate(true, 270L * 20L, true, false, true);
 		assertEquals(0.0f, activeDeepUnderground.radiationDamage(), 0.001f);
+
+		StormSnapshot smallLeak = SolarStormCalculator.evaluateWithLeakage(true, 270L * 20L, 0.25, false);
+		StormSnapshot largeLeak = SolarStormCalculator.evaluateWithLeakage(true, 270L * 20L, 0.80, false);
+		StormSnapshot suitStopsLeak = SolarStormCalculator.evaluateWithLeakage(true, 270L * 20L, 0.80, true);
+		assertTrue(smallLeak.radiationDamage() > 0.0f && smallLeak.radiationDamage() < largeLeak.radiationDamage());
+		assertEquals(0.0f, suitStopsLeak.radiationDamage(), 0.001f);
 	}
 }

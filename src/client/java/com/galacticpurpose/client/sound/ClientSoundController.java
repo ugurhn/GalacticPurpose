@@ -27,6 +27,7 @@ public final class ClientSoundController {
 	private static final Set<Integer> DETONATED_ENTITY_IDS = new HashSet<>();
 	private static final Map<BlockPos, WormholeAmbienceSoundInstance> ACTIVE_WORMHOLE_SOUNDS = new HashMap<>();
 	private static StarshipEngineSoundInstance activeEngineSound;
+	private static SolarStormImpactSoundInstance activeStormSound;
 	private static int engineSwitchCooldownTicks = 0;
 	private static Object lastWorldRef;
 
@@ -76,6 +77,18 @@ public final class ClientSoundController {
 				safeVol,
 				payload.pitch(),
 				ProceduralAudioStreams.AbortAlarmStream::new
+			);
+			case ClientSoundEventPayload.EVENT_STORM_WARNING -> new OneShotProceduralSoundInstance(
+				GalacticPurpose.id("solar_storm_alert"),
+				safeVol,
+				payload.pitch(),
+				ProceduralAudioStreams.SolarStormAlertStream::new
+			);
+			case ClientSoundEventPayload.EVENT_STORM_STRIKE -> new OneShotProceduralSoundInstance(
+				GalacticPurpose.id("solar_storm_impact"),
+				safeVol,
+				payload.pitch(),
+				ProceduralAudioStreams.SolarStormStrikePulseStream::new
 			);
 			default -> null;
 		};
@@ -188,6 +201,19 @@ public final class ClientSoundController {
 			activeEngineSound = null;
 			engineSwitchCooldownTicks = 0;
 		}
+
+		boolean stormActive = com.galacticpurpose.client.hud.ClientMarsState.isActiveInDimension()
+			&& com.galacticpurpose.client.hud.ClientMarsState.isRedGiantActive()
+			&& com.galacticpurpose.client.hud.ClientMarsState.getStormPhase() == com.galacticpurpose.terraforming.SolarStormPhase.ACTIVE;
+		if (stormActive) {
+			if (activeStormSound == null || activeStormSound.isStopped() || !mc.getSoundManager().isActive(activeStormSound)) {
+				activeStormSound = new SolarStormImpactSoundInstance();
+				mc.getSoundManager().play(activeStormSound);
+			}
+		} else if (activeStormSound != null) {
+			mc.getSoundManager().stop(activeStormSound);
+			activeStormSound = null;
+		}
 	}
 
 	public static void reset() {
@@ -199,8 +225,12 @@ public final class ClientSoundController {
 			if (activeEngineSound != null) {
 				mc.getSoundManager().stop(activeEngineSound);
 			}
+			if (activeStormSound != null) {
+				mc.getSoundManager().stop(activeStormSound);
+			}
 		}
 		activeEngineSound = null;
+		activeStormSound = null;
 		ACTIVE_WORMHOLE_SOUNDS.clear();
 		DETONATED_ENTITY_IDS.clear();
 	}

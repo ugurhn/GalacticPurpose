@@ -55,9 +55,7 @@ public final class WormholeHologramRenderer {
 			);
 			return;
 		}
-		anchorCorePos = corePos.immutable();
-		activeTier = tier;
-		anchorDimension = mc.level.dimension().location();
+		ensureShown(corePos, tier);
 		mc.player.displayClientMessage(
 			Component.translatable(
 				"message.galacticpurpose.hologram_projected",
@@ -66,6 +64,16 @@ public final class WormholeHologramRenderer {
 			).withStyle(ChatFormatting.AQUA),
 			true
 		);
+	}
+
+	public static void ensureShown(BlockPos corePos, WormholeTier tier) {
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.level == null) {
+			return;
+		}
+		anchorCorePos = corePos.immutable();
+		activeTier = tier;
+		anchorDimension = mc.level.dimension().location();
 	}
 
 	public static void projectInFrontOfPlayer(WormholeTier tier) {

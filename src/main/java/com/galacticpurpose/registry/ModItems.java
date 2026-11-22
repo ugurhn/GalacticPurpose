@@ -45,6 +45,8 @@ public final class ModItems {
 		new StarshipBlueprintItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
 	public static final Item FLIGHT_DIRECTOR = register("flight_director",
 		new StarshipFlightDirectorItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+	public static final Item STRUCTURE_ASSEMBLER = register("structure_assembler",
+		new com.galacticpurpose.item.StructureAssemblerItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 	public static final Item MARS_BIO_ESSENCE = register("mars_bio_essence", new Item(new Item.Properties()));
 	public static final Item EXOTIC_BIO_FUEL = register("exotic_bio_fuel",
 		new ExoticBioFuelItem(new Item.Properties()));

@@ -89,6 +89,14 @@ public class WormholeCoreBlock extends BaseEntityBlock {
 			}
 			return ItemInteractionResult.sidedSuccess(level.isClientSide);
 		}
+		if (stack.is(ModItems.STRUCTURE_ASSEMBLER)) {
+			if (!level.isClientSide) {
+				com.galacticpurpose.item.StructureAssemblerItem.assembleOnCore(level, pos, player, stack);
+			} else if (player == null || !player.isShiftKeyDown()) {
+				com.galacticpurpose.item.StructureAssemblerItem.showClientPreview(pos, stack);
+			}
+			return ItemInteractionResult.sidedSuccess(level.isClientSide);
+		}
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 

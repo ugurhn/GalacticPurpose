@@ -60,6 +60,16 @@ public final class ModBlocks {
 			.isViewBlocking((state, level, pos) -> false)
 			.isSuffocating((state, level, pos) -> false)
 	));
+	public static final Block LEADED_DOOR = registerWithItem("leaded_door",
+		new com.galacticpurpose.block.LeadedDoorBlock(
+			BlockBehaviour.Properties.of()
+				.strength(6.0f, 1200.0f)
+				.requiresCorrectToolForDrops()
+				.sound(SoundType.METAL)
+				.noOcclusion()
+				.pushReaction(PushReaction.DESTROY)
+		)
+	);
 	public static final Block SOLAR_TELEMETRY_MONITOR = registerWithItem("solar_telemetry_monitor",
 		new SolarTelemetryMonitorBlock(
 			BlockBehaviour.Properties.of()

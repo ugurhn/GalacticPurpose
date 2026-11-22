@@ -58,5 +58,15 @@
     "sounds": [
       { "name": "fabric-sound-api-v1:empty", "stream": true }
     ]
+  },
+  "solar_storm_alert": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
+  },
+  "solar_storm_impact": {
+    "sounds": [
+      { "name": "fabric-sound-api-v1:empty", "stream": true }
+    ]
   }
 }

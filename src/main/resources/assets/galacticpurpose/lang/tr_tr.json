@@ -471,5 +471,21 @@
   "message.galacticpurpose.wormhole_small_no_transit": "[PROTOTİP] 7x4x7 küçük çekirdek gemi/insan geçiremez! Yolculuk için 45x41x45 Devasa Gözlemevi kurup Horizon Lander ile uçun.",
   "message.galacticpurpose.wormhole_enter_via_ship": "[GEÇİT HAZIR] Pistteki Horizon Lander'a binip [SPACE x2] veya [G] ile solucan deliğine uçun!",
   "key.categories.galacticpurpose": "Galactic Purpose",
-  "key.galacticpurpose.ship_action": "Horizon Lander Ateşleme / İniş"
+  "key.galacticpurpose.ship_action": "Horizon Lander Ateşleme / İniş",
+  "block.galacticpurpose.leaded_door": "Kurşun Zırhlı Kapı",
+  "item.galacticpurpose.structure_assembler": "Solucan Deliği Yapı Kurucu",
+  "tooltip.galacticpurpose.structure_assembler_mode": "Hedef Yapı: %s",
+  "tooltip.galacticpurpose.structure_assembler_hint_1": "Çekirdeğe sağ tıkladıkça envanterden otomatik inşa eder ve eksikleri raporlar",
+  "tooltip.galacticpurpose.structure_assembler_hint_2": "Kişisel / Devasa mod değişimi için Shift+Sağ Tık veya havaya sağ tıkla",
+  "message.galacticpurpose.assembler_mode": "[Kurucu] Hedef mod: %s (%s blok gerekir)",
+  "message.galacticpurpose.assembler_progress": "[Kurucu • %s] %s / %s yerleştirildi (+%s)",
+  "message.galacticpurpose.assembler_obstruction": "[ENGEL] Yapıyı engelleyen %s blok var — ilk engel: %s (%s, %s, %s)",
+  "message.galacticpurpose.assembler_needed_prefix": "Gerekenler: ",
+  "message.galacticpurpose.assembler_complete": "[Kurucu • %s] Yapı %%100 tamamlandı ve DOĞRULANDI! Çekirdeğe sağ tıklayıp açabilirsin.",
+  "message.galacticpurpose.telemetry_leaky": "KAÇAK VAR (%s%% radyasyon sızıntısı!)",
+  "message.galacticpurpose.telemetry_leaky_pos": "KAÇAK VAR (%s%% sızıntı — açıklık (%s, %s, %s) civarında!)",
+  "message.galacticpurpose.storm_breach_warning": "[KAÇAK UYARISI] Sığınaktaki açıklıktan/kapıdan %%%s radyasyon sızıyor — deliği kapat!",
+  "hud.galacticpurpose.shelter_sealed": "Koruma: TAM KAPALI (0% kaçak)",
+  "hud.galacticpurpose.shelter_leaky": "Koruma: KAÇAK VAR (%%%s risk!)",
+  "hud.galacticpurpose.shelter_exposed": "Koruma: AÇIKTA (%100 risk)"
 }

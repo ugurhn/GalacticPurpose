@@ -9,6 +9,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Validates and builds both Personal (7x5x7, 4 stabilizers) and Colossal Ship-Scale Observatory
  * (45x41x45 octagonal open-sky accelerator monument with 4 curved monolith spires and 4x 3x3 = 36 stabilizers).
@@ -18,6 +21,9 @@ public final class WormholeMultiblockValidator {
 		public static ValidationResult ok(WormholeTier tier) {
 			return new ValidationResult(true, tier, BlockPos.ZERO, "");
 		}
+	}
+
+	public record StructureBlockSpec(BlockPos offset, BlockState targetState) {
 	}
 
 	public static final BlockPos INJECTOR_OFFSET = new BlockPos(0, -3, 0);
@@ -150,6 +156,67 @@ public final class WormholeMultiblockValidator {
 	/**
 	 * Checks whether a specific cardinal stabilizer side is intact right now (used by renderer to kill beams on broken sides!).
 	 */
+	public static List<StructureBlockSpec> getRequiredBlueprint(WormholeTier tier) {
+		List<StructureBlockSpec> specs = new ArrayList<>();
+		BlockState concrete = ModBlocks.LEAD_CONCRETE.defaultBlockState();
+		BlockState injector = ModBlocks.WORMHOLE_INJECTOR.defaultBlockState();
+		if (tier == WormholeTier.PERSONAL) {
+			specs.add(new StructureBlockSpec(INJECTOR_OFFSET, injector));
+			for (BlockPos off : CONCRETE_OFFSETS) {
+				specs.add(new StructureBlockSpec(off, concrete));
+			}
+			specs.add(new StructureBlockSpec(new BlockPos(3, 0, 0),
+				ModBlocks.WORMHOLE_STABILIZER_PYLON.defaultBlockState().setValue(WormholeStabilizerPylonBlock.FACING, Direction.WEST)));
+			specs.add(new StructureBlockSpec(new BlockPos(-3, 0, 0),
+				ModBlocks.WORMHOLE_STABILIZER_PYLON.defaultBlockState().setValue(WormholeStabilizerPylonBlock.FACING, Direction.EAST)));
+			specs.add(new StructureBlockSpec(new BlockPos(0, 0, 3),
+				ModBlocks.WORMHOLE_STABILIZER_PYLON.defaultBlockState().setValue(WormholeStabilizerPylonBlock.FACING, Direction.NORTH)));
+			specs.add(new StructureBlockSpec(new BlockPos(0, 0, -3),
+				ModBlocks.WORMHOLE_STABILIZER_PYLON.defaultBlockState().setValue(WormholeStabilizerPylonBlock.FACING, Direction.SOUTH)));
+			return List.copyOf(specs);
+		}
+
+		int d = WormholeTier.COLOSSAL.stabilizerDistance();
+		int drop = WormholeTier.COLOSSAL.injectorDrop();
+		specs.add(new StructureBlockSpec(COLOSSAL_INJECTOR_OFFSET, injector));
+
+		for (BlockPos off : new BlockPos[]{
+			new BlockPos(15, -drop, 15), new BlockPos(15, -drop, -15),
+			new BlockPos(-15, -drop, 15), new BlockPos(-15, -drop, -15)
+		}) {
+			specs.add(new StructureBlockSpec(off, concrete));
+		}
+
+		for (int dy = -drop; dy <= -2; dy++) {
+			specs.add(new StructureBlockSpec(new BlockPos(d, dy, 0), concrete));
+			specs.add(new StructureBlockSpec(new BlockPos(-d, dy, 0), concrete));
+			specs.add(new StructureBlockSpec(new BlockPos(0, dy, d), concrete));
+			specs.add(new StructureBlockSpec(new BlockPos(0, dy, -d), concrete));
+		}
+
+		for (int side : new int[]{1, -1}) {
+			int posMain = side * d;
+			BlockState xPylon = ModBlocks.WORMHOLE_STABILIZER_PYLON.defaultBlockState()
+				.setValue(WormholeStabilizerPylonBlock.FACING, side > 0 ? Direction.WEST : Direction.EAST);
+			BlockState zPylon = ModBlocks.WORMHOLE_STABILIZER_PYLON.defaultBlockState()
+				.setValue(WormholeStabilizerPylonBlock.FACING, side > 0 ? Direction.NORTH : Direction.SOUTH);
+			for (int dy = -1; dy <= 1; dy++) {
+				for (int t = -1; t <= 1; t++) {
+					specs.add(new StructureBlockSpec(new BlockPos(posMain, dy, t), xPylon));
+					specs.add(new StructureBlockSpec(new BlockPos(t, dy, posMain), zPylon));
+				}
+			}
+		}
+		return List.copyOf(specs);
+	}
+
+	public static List<BlockPos> getRequiredClearOffsets(WormholeTier tier) {
+		if (tier == WormholeTier.PERSONAL) {
+			return List.of(PORTAL_OFFSET, LOWER_CLEAR_OFFSET);
+		}
+		return List.of(PORTAL_OFFSET);
+	}
+
 	public static boolean isStabilizerSideIntact(Level level, BlockPos corePos, WormholeTier tier, Direction side) {
 		int d = tier.stabilizerDistance();
 		if (tier == WormholeTier.PERSONAL) {
