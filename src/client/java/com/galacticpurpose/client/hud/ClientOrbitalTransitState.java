@@ -61,11 +61,11 @@ public final class ClientOrbitalTransitState {
 			return 0.0f;
 		}
 		long dt = System.currentTimeMillis() - arrivalFadeOutStartMs;
-		if (dt >= 1400L) {
+		if (dt >= 900L) {
 			arrivalFadeOutStartMs = 0L;
 			return 0.0f;
 		}
-		float rem = 1.0f - Mth.clamp(dt / 1400.0f, 0.0f, 1.0f);
+		float rem = 1.0f - Mth.clamp(dt / 900.0f, 0.0f, 1.0f);
 		return rem * rem;
 	}
 

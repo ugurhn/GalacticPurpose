@@ -107,22 +107,22 @@ public final class OrbitalTransitSkyRenderer implements DimensionRenderingRegist
 		ErebusSkyRenderer.renderErebusAt(this.workMat, this.scratchMat, time, 1.02f, 0.98f, 0.94f);
 		RenderSystem.defaultBlendFunc();
 
-		// 3. HUGE High-LOD 512x256 Textured 7,000 km Exoplanet (continuous growth through 1,000 km -> 120 km & entry plunge!)
+		// 3. HUGE High-LOD 512x256 Textured 7,000 km Exoplanet (continuous growth through 1,000 km -> 120 km; safe standoff so camera never clips inside!)
 		float planetScale = com.galacticpurpose.ship.StarshipFlightPhysics.computePlanetVisualScale(progress, returning, entry);
-		float planetZ = returning ? -96.0f : Mth.lerp(entry * entry, 104.0f, 44.0f);
+		float planetZ = returning ? -96.0f : Mth.lerp(entry, 120.0f, 102.0f);
 		float closeRatio = Mth.clamp((planetScale - 24.0f) / 72.0f, 0.0f, 1.0f);
-		float planetY = returning ? -6.0f : (Mth.lerp(closeRatio, -6.0f, -38.0f) + entry * 22.0f);
+		float planetY = returning ? -6.0f : (Mth.lerp(closeRatio, -6.0f, -38.0f) + entry * 10.0f);
 		this.workMat.set(this.viewMat)
 			.translate(0.0f, planetY, planetZ)
 			.rotateY(time * 0.045f)
 			.rotateZ((float) Math.toRadians(10.0));
 		drawSmoothCulled3DPlanet(this.workMat, this.scratchMat, route, planetScale, time);
 
-		// 4. RELATIVISTIC 60m SPACE WORMHOLE (0.16 pinpoint -> continuous approach -> full windshield -> fly inside!)
+		// 4. RELATIVISTIC 60m SPACE WORMHOLE (0.16 pinpoint -> continuous approach -> restrained entry swell strictly outside sphere)
 		float wormholeScale = com.galacticpurpose.ship.StarshipFlightPhysics.computeWormholeVisualScale(progress, returning, entry);
-		float wormholeZ = returning ? Mth.lerp((float) Math.pow(entry, 1.15), 76.0f, 1.5f) : -76.0f;
+		float wormholeZ = returning ? Mth.lerp(entry, 76.0f, 44.0f) : -76.0f;
 		this.workMat.set(this.viewMat)
-			.translate(0.0f, returning ? Mth.lerp(entry, 2.5f, 0.5f) : 2.5f, wormholeZ);
+			.translate(0.0f, returning ? Mth.lerp(entry, 2.5f, 1.0f) : 2.5f, wormholeZ);
 		drawRelativisticSpaceWormhole(this.workMat, this.scratchMat, wormholeScale, returning, route, time);
 
 		// 5. Smooth Circular Radial Plasma Corona swelling progressively on Atmospheric Entry / Wormhole Plunge

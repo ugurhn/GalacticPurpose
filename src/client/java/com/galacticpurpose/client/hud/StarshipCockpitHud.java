@@ -143,13 +143,13 @@ public final class StarshipCockpitHud {
 		if (ClientOrbitalTransitState.inTransit() && ClientOrbitalTransitState.reentryActive()) {
 			float e = ClientOrbitalTransitState.entryProgress();
 			boolean returning = ClientOrbitalTransitState.returning();
-			float glowAlpha = Mth.clamp((e - 0.15f) / 0.55f, 0.0f, 1.0f) * 0.42f;
+			float glowAlpha = Mth.clamp((e - 0.05f) / 0.35f, 0.0f, 1.0f) * 0.45f;
 			if (glowAlpha > 0.01f) {
 				int glowRgb = returning ? 0x38BDF8 : 0xF97316;
 				int aGlow = Math.round(glowAlpha * 255.0f);
 				g.fill(0, 0, sw, sh, (aGlow << 24) | glowRgb);
 			}
-			float darkAlpha = Mth.clamp((e - 0.50f) / 0.44f, 0.0f, 1.0f);
+			float darkAlpha = Mth.clamp((e - 0.24f) / 0.44f, 0.0f, 1.0f);
 			if (darkAlpha > 0.01f) {
 				int aDark = Math.round(darkAlpha * 255.0f);
 				int darkRgb = returning ? 0x050916 : 0x090405;

@@ -1,11 +1,13 @@
 package com.galacticpurpose.block;
 
+import com.galacticpurpose.entity.InterstellarShipEntity;
+import com.galacticpurpose.ship.OrbitalTransitManager;
 import com.galacticpurpose.wormhole.ExoplanetRoute;
-import com.galacticpurpose.wormhole.ExoplanetTravelHandler;
 import com.galacticpurpose.wormhole.WormholeState;
 import com.galacticpurpose.wormhole.WormholeTier;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -35,19 +37,42 @@ public class WormholePortalBlock extends Block {
 
 	@Override
 	protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-		if (level.isClientSide || !(entity instanceof ServerPlayer player)) {
-			return;
-		}
-		if (player.isOnPortalCooldown()) {
+		if (level.isClientSide || !(level instanceof ServerLevel serverLevel)) {
 			return;
 		}
 		WormholeCoreBlockEntity core = findParentCore(level, pos);
-		if (core != null && core.wormholeState() == WormholeState.OPEN) {
-			ExoplanetRoute route = core.selectedRoute();
-			if (route != null) {
-				player.setPortalCooldown(80);
-				ExoplanetTravelHandler.travel(player, route);
+		if (core == null || core.wormholeState() != WormholeState.OPEN) {
+			return;
+		}
+		ExoplanetRoute route = core.selectedRoute();
+		if (route == null) {
+			return;
+		}
+
+		InterstellarShipEntity ship = null;
+		ServerPlayer pilot = null;
+		if (entity instanceof InterstellarShipEntity s) {
+			ship = s;
+			if (s.getFirstPassenger() instanceof ServerPlayer sp) {
+				pilot = sp;
 			}
+		} else if (entity instanceof ServerPlayer p && p.getVehicle() instanceof InterstellarShipEntity s) {
+			ship = s;
+			pilot = p;
+		}
+
+		if (ship != null && pilot != null && core.activeTier() == WormholeTier.COLOSSAL) {
+			if (!pilot.isOnPortalCooldown()) {
+				pilot.setPortalCooldown(80);
+				OrbitalTransitManager.beginOutboundTransit(
+					pilot, ship, route, serverLevel.dimension().location(), core.getBlockPos()
+				);
+			}
+			return;
+		}
+
+		if (entity instanceof ServerPlayer barePlayer) {
+			WormholeCoreBlockEntity.repelUnshieldedPlayer(serverLevel, pos, core.getBlockPos(), barePlayer);
 		}
 	}
 

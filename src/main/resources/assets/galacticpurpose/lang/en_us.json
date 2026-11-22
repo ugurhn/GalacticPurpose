@@ -467,6 +467,9 @@
   "hud.galacticpurpose.mode_relocating": "AUTOPILOT RELOCATION",
   "hud.galacticpurpose.relocating_telemetry_hint": "Automated point-to-point ferry active — climbing over terrain toward LZ",
   "hud.galacticpurpose.fc_ship_relocating_desc": "Point-to-point autopilot ferry climbing along ballistic arc toward marked coordinates.",
+  "message.galacticpurpose.wormhole_requires_ship": "[HAZARD] Unshielded human transit impossible! Tidal shear repels foot travel — fly through inside a Horizon Lander!",
+  "message.galacticpurpose.wormhole_small_no_transit": "[PROTOTYPE] The 7x4x7 Core cannot carry human mass! Build the 45x41x45 Colossal Observatory and fly through inside a Horizon Lander.",
+  "message.galacticpurpose.wormhole_enter_via_ship": "[GATEWAY LOCKED] Board your Horizon Lander on the runway and press [SPACE x2] or [G] to fly through!",
   "key.categories.galacticpurpose": "Galactic Purpose",
   "key.galacticpurpose.ship_action": "Horizon Lander Launch / Descend"
 }

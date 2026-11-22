@@ -123,16 +123,16 @@ class StarshipFlightPhysicsTest {
 		float sPlunge = StarshipFlightPhysics.computePlanetVisualScale(1.0f, false, 1.0f);
 		assertTrue(s1000 > s0 + 40.0f);
 		assertTrue(s120 > s1000 + 20.0f, "Planet must continue growing visibly from 1000 km down to 120 km");
-		assertTrue(sPlunge > s120 + 25.0f, "Planet must zoom closer during [G] entry plunge");
+		assertTrue(sPlunge >= s120 + 10.0f && sPlunge < 120.0f, "Planet swells smoothly during [G] entry without hollow sphere clipping");
 
-		// Return Wormhole starts pinpoint (< 0.25), grows cleanly across mid-cruise & 200 km, and plunges inside!
+		// Return Wormhole starts pinpoint (< 0.25), grows cleanly across mid-cruise & 200 km, and swells cleanly at entry!
 		float w0 = StarshipFlightPhysics.computeWormholeVisualScale(0.0f, true, 0.0f);
 		float wMid = StarshipFlightPhysics.computeWormholeVisualScale(0.50f, true, 0.0f);
 		float w206 = StarshipFlightPhysics.computeWormholeVisualScale(0.89f, true, 0.0f);
 		float w100 = StarshipFlightPhysics.computeWormholeVisualScale(1.0f, true, 0.0f);
 		float wIn = StarshipFlightPhysics.computeWormholeVisualScale(1.0f, true, 1.0f);
 		assertTrue(w0 < 0.25f && wMid > w0 * 3.0f);
-		assertTrue(w206 > 5.0f && w100 > 22.0f && wIn > 70.0f);
+		assertTrue(w206 > 5.0f && w100 > 22.0f && wIn > 35.0f && wIn < 45.0f);
 	}
 
 	@Test

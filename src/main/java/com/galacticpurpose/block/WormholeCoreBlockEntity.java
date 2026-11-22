@@ -10,7 +10,6 @@ import com.galacticpurpose.registry.ModBlocks;
 import com.galacticpurpose.registry.ModItems;
 import com.galacticpurpose.ship.OrbitalTransitManager;
 import com.galacticpurpose.wormhole.ExoplanetRoute;
-import com.galacticpurpose.wormhole.ExoplanetTravelHandler;
 import com.galacticpurpose.wormhole.WormholeLinkCalculator;
 import com.galacticpurpose.wormhole.WormholeLinkRegistry;
 import com.galacticpurpose.wormhole.WormholeMultiblockValidator;
@@ -249,12 +248,9 @@ public class WormholeCoreBlockEntity extends BlockEntity
 					}
 				}
 				for (ServerPlayer player : serverLevel.getEntitiesOfClass(ServerPlayer.class, coreSphere)) {
-					if (!player.isPassenger()
-						&& !player.isShiftKeyDown()
-						&& !player.isOnPortalCooldown()
-						&& player.position().distanceTo(center) <= core.activeTier.coreRadius() + 0.4) {
-						player.setPortalCooldown(80);
-						ExoplanetTravelHandler.travel(player, route);
+					if (!(player.getVehicle() instanceof InterstellarShipEntity)
+						&& player.position().distanceTo(center) <= core.activeTier.coreRadius() + 0.5) {
+						repelUnshieldedPlayer(serverLevel, pos, pos, player);
 					}
 				}
 			}
@@ -498,7 +494,7 @@ public class WormholeCoreBlockEntity extends BlockEntity
 		level.sendBlockUpdated(this.worldPosition, next, next, Block.UPDATE_CLIENTS);
 	}
 
-	public void handleMenuButton(ServerPlayer player, int buttonId) {
+	public void handleMenuButton(Player player, int buttonId) {
 		if (this.level == null) {
 			return;
 		}
@@ -572,14 +568,49 @@ public class WormholeCoreBlockEntity extends BlockEntity
 				this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
 			}
 		} else if (buttonId == 2) {
-			if (this.wormholeState == WormholeState.OPEN) {
-				ExoplanetRoute route = selectedRoute();
-				if (route != null) {
-					player.closeContainer();
-					ExoplanetTravelHandler.travel(player, route);
+			if (this.wormholeState == WormholeState.OPEN && player != null) {
+				if (player instanceof ServerPlayer sp) {
+					sp.closeContainer();
+				}
+				if (this.activeTier != WormholeTier.COLOSSAL) {
+					player.displayClientMessage(
+						Component.translatable("message.galacticpurpose.wormhole_small_no_transit")
+							.withStyle(ChatFormatting.GOLD),
+						false
+					);
+				} else {
+					player.displayClientMessage(
+						Component.translatable("message.galacticpurpose.wormhole_enter_via_ship")
+							.withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD),
+						false
+					);
 				}
 			}
 		}
+	}
+
+	public static void repelUnshieldedPlayer(ServerLevel level, BlockPos portalPos, BlockPos corePos, Player player) {
+		if (player.isOnPortalCooldown()) {
+			return;
+		}
+		player.setPortalCooldown(35);
+		Vec3 center = Vec3.atCenterOf(portalPos);
+		Vec3 away = player.position().subtract(center);
+		if (away.lengthSqr() < 0.05) {
+			away = new Vec3(0.0, 0.35, 1.0);
+		}
+		Vec3 knock = away.normalize().scale(1.15);
+		player.push(knock.x, Math.max(0.28, knock.y * 0.45), knock.z);
+		player.hurtMarked = true;
+		if (!player.isCreative() && !player.isSpectator()) {
+			player.hurt(level.damageSources().magic(), 6.0f);
+		}
+		level.playSound(null, corePos, net.minecraft.sounds.SoundEvents.BEACON_DEACTIVATE, net.minecraft.sounds.SoundSource.BLOCKS, 1.4f, 0.55f);
+		player.displayClientMessage(
+			Component.translatable("message.galacticpurpose.wormhole_requires_ship")
+				.withStyle(ChatFormatting.RED, ChatFormatting.BOLD),
+			true
+		);
 	}
 
 	@Override

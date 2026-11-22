@@ -985,6 +985,35 @@ public class GalacticPurposeGameTests implements FabricGameTest {
 		});
 	}
 
+	@GameTest(template = EMPTY_STRUCTURE, batch = "wormhole_ship_gate", skyAccess = true, timeoutTicks = 80)
+	public void unshieldedPlayerWalkingIntoWormholeIsRepelledAndNotTeleported(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		BlockPos corePos = new BlockPos(4, 5, 4);
+		helper.setBlock(corePos, ModBlocks.WORMHOLE_CORE);
+		buildWormholeFrame(helper, corePos);
+		WormholeCoreBlockEntity core = helper.getBlockEntity(corePos);
+		core.configureStablePreset(level, ExoplanetRoute.HEPHAESTUS_IV, WormholeTier.PERSONAL);
+
+		Player bare = helper.makeMockPlayer(GameType.SURVIVAL);
+		BlockPos portalAbs = helper.absolutePos(corePos.below());
+		bare.setPos(portalAbs.getX() + 0.5, portalAbs.getY() + 0.1, portalAbs.getZ() + 0.5);
+
+		// Simulate stepping directly inside open WORMHOLE_PORTAL without a Horizon Lander
+		WormholeCoreBlockEntity.repelUnshieldedPlayer(level, portalAbs, helper.absolutePos(corePos), bare);
+		helper.assertTrue(
+			bare.level().dimension().equals(Level.OVERWORLD) && bare.isOnPortalCooldown(),
+			"Unshielded player must remain in Overworld and receive portal repulsion cooldown"
+		);
+		helper.assertTrue(
+			bare.getHealth() < bare.getMaxHealth(),
+			"Unshielded Survival traveler hitting raw wormhole tidal shear must take hazard damage"
+		);
+		// Clicking GUI 'Enter' button (id=2) on open core must NOT warp bare player either
+		core.handleMenuButton(bare, 2);
+		helper.assertTrue(bare.level().dimension().equals(Level.OVERWORLD), "GUI Enter button must require Horizon Lander transit");
+		helper.succeed();
+	}
+
 	private static void buildWormholeFrame(GameTestHelper helper, BlockPos corePos) {
 		WormholeMultiblockValidator.buildStructure(helper.getLevel(), helper.absolutePos(corePos), WormholeTier.PERSONAL);
 	}

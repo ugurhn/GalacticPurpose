@@ -10,7 +10,7 @@ public final class StarshipFlightPhysics {
 	public static final int COUNTDOWN_TICKS = 200;
 	public static final int ASCENT_DURATION_TICKS = 900;
 	public static final int CRUISE_DURATION_TICKS = 1800;
-	public static final int REENTRY_DURATION_TICKS = 90;
+	public static final int REENTRY_DURATION_TICKS = 55;
 	public static final double TRANSIT_CORRIDOR_KM = 12_000.0;
 	public static final double PLANET_RADIUS_KM = 7_000.0;
 	public static final double WORMHOLE_RADIUS_KM = 0.030; // 60 m throat diameter
@@ -232,7 +232,7 @@ public final class StarshipFlightPhysics {
 			return Mth.lerp((float) Math.pow(p, 0.72), 20.0f, 11.0f);
 		}
 		float cruiseScale = 21.0f + 56.0f * (float) Math.pow(p, 1.35) + 19.0f * (float) Math.pow(p, 5.0);
-		return cruiseScale + 38.0f * (float) Math.pow(e, 1.35);
+		return cruiseScale + 12.0f * (float) Math.pow(e, 1.15);
 	}
 
 	public static float computeWormholeVisualScale(float progress, boolean returning, float entryProgress) {
@@ -245,7 +245,7 @@ public final class StarshipFlightPhysics {
 			+ 1.35f * (float) Math.pow(p, 1.35)
 			+ 5.80f * (float) Math.pow(p, 3.80)
 			+ 17.69f * (float) Math.pow(p, 9.50);
-		return base + 62.0f * (float) Math.pow(e, 1.55);
+		return base + 14.0f * (float) Math.pow(e, 1.15);
 	}
 
 	public static String computeCompassBearing(double dx, double dz) {

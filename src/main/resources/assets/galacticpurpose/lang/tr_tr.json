@@ -467,6 +467,9 @@
   "hud.galacticpurpose.mode_relocating": "OTOPİLOT NAKLİYE",
   "hud.galacticpurpose.relocating_telemetry_hint": "Noktadan noktaya otonom uçuş aktif — arazi aşılıp iniş alanına gidiliyor",
   "hud.galacticpurpose.fc_ship_relocating_desc": "Otopilot, işaretlenen bloğa doğru kalkış tırmanışı ve vektör inişi gerçekleştiriyor.",
+  "message.galacticpurpose.wormhole_requires_ship": "[TEHLİKE] Solucan deliğine yaya girilemez! Gelgit çekimi insanı parçalar — Horizon Lander içinde geçin!",
+  "message.galacticpurpose.wormhole_small_no_transit": "[PROTOTİP] 7x4x7 küçük çekirdek gemi/insan geçiremez! Yolculuk için 45x41x45 Devasa Gözlemevi kurup Horizon Lander ile uçun.",
+  "message.galacticpurpose.wormhole_enter_via_ship": "[GEÇİT HAZIR] Pistteki Horizon Lander'a binip [SPACE x2] veya [G] ile solucan deliğine uçun!",
   "key.categories.galacticpurpose": "Galactic Purpose",
   "key.galacticpurpose.ship_action": "Horizon Lander Ateşleme / İniş"
 }
